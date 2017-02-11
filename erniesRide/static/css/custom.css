@@ -1,8 +1,17 @@
-.navbar {
-	margin-bottom: 0;
+.navbar-default {
+	background-color: #76323F;
 }
 
-#donationSection {
+#footer-text {
+	color: white;
+}
+
+#footer-text a {
+	color: white;
+}
+
+.navbar {
+	margin-bottom: 0;
 }
 
 #donationMessage {
@@ -27,19 +36,12 @@
 	padding-left: 0px;
 }
 
-#testText {
-	float: right;
-
-}
 .form-group label {
 	color: black;
 }
 
 .form-group {
 	text-align: left;
-}
-
-.cell-background {
 }
 
 #bold-text {
@@ -108,37 +110,10 @@ p {
 	border: 0;
 }
 
-.navbar-inverse .navbar-nav li a {
-	color: #76323F;
-	font-size: 16px;
-}
-
-.navbar-inverse .navbar-nav li a:hover {
-	color: #76323F;
-}
-
-.dropdown-menu {
-	background: #2E2F31;
-	border-radius: 0;
-	border: 0;
-}
-
-.dropdown-menu li a {
-	padding: 10px;
-}
-
-.navbar-inverse .navbar-nav .dropdown-menu li a:hover {
-	background: #76323F;
-}
-
 .navbar-inverse .navbar-brand {
 	color: #76323F;
 }
 
 .navbar-inverse .navbar-brand:hover {
 	color: #76323F;
-}
-
-.navbar-header a:hover {
-	color:blue;
 }
