@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ernie's Ride</title>
+    <link href="static/css/normalize.css" rel="stylesheet">
+    <link href="static/css/bs/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/custom.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Ernie's Ride 2017</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Donate</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid main-banner">
+      <div class="row img-container">
+        <div class="col-md-12">
+          <img src="static/images/testimg.jpg" class="img-responsive center-block">
+        </div>
+      </div>
+    </div>
+    <div class="container written-content">
+      <div class="row">
+        <div class="col-md-6">
+          <h1>About the Ride</h1>
+          <img src="static/images/state-map.jpg" class="img-responsive center-block">
+          <p>In May 2014, Doug will be doing a 48-hour bike ride from the Ohio River in Cincinnati to Lake Erie in Cleveland – a total of 320 miles.  This cause is to raise support, awareness, and a fundraiser for the Community Pregnancy Center.  Doug is doing this in honor of his Uncle Ernie who had Down’s Syndrome and died at age 58.  Doug believes in the value of every human life due, in good measure, to the life of his Uncle Ernie.
+          </p>
+          <h3>THE 48-HOUR RIDE WILL TAKE PLACE ON MAY 30TH – JUNE 1ST.</h3>
+          <p>Ernie’s Ride will begin on Friday evening at the Ohio River by Paul Brown Stadium and will conclude exactly 48 hours later on Sunday evening – – hopefully, at Edgewater Park on Lake Erie.
+          <br>
+          Alternate dates of June 6th – June 8th in case of adverse weather conditions.
+          </p>
+        </div>
+        <div class="col-md-6">
+          <h1>Donate</h1>
+          <div class="row">
+            <p>
+            If you would like to make a pledge for Ernie's ride, please fill out the form below. After Doug has completed the ride you will be contacted for payment through the email address that you leave.
+            </p>
+            <div id="donationSection">
+              <form action="javascript: myFunction(); return {};">
+            <!-- <form> -->
+              <div class="form-group">
+                <label for="inputEmail">Email Address</label>
+                <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+              </div>
+              <div class="form-group">
+                <label for="pledgeAmount">Pledge Amount (per mile)</label>
+                <div class="container-fluid" id="pledgeDiv">
+                <input type="text" class="form-control" id="pledgeAmount" placeholder="$0.00"> <span id="mileText"> x 320 miles = $0.00 Maximum Possible Pledge</span>
+              </div>
+              </div>
+              <button type="submit" id="submitButton" class="btn btn-default pull-left">Submit</button>
+            </form>
+            <!-- </form> -->
+            </div>
+        </div>
+          <div class="row cell-background">
+            <br><br><div id="donationMessage"></div>
+            <p id="bold-text">Total Currently Pledged: $<span id="pledgeSum">{{ pledgeSum }}</span>/mi</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <h1>Doug and Ernie's Story</h1>
+        <p>
+        I’m no professional cyclist. I work my 40-hour week at a fantastic flavor company in Lebanon, Ohio, that provides all that is needed for me to be able to cycle to work most every day. It is a blessing, for sure! I also am an ordained minister in the Church of the Nazarene and assist a very good friend who pastors a small non-denominational church in downtown Lebanon. I am married to my college sweetheart, Judy, and we are blessed with two sons, of whom we are tremendously proud – Andrew &amp; Tim. 
+        <br>
+        <br>
+        This event is called “Ernie’s Ride” in honor of my late Uncle Ernie who was born and lived 58 years with Down Syndrome. His life taught me what it meant to be loved &amp; valued no matter the circumstance. I miss him. I was honored to have him for an uncle. You can read a little more about him on my blog from a couple years back: http://challengepointe.blogspot.com/2011/03/born-that-way.html
+        <br>
+        <br>
+        I’m no professional cyclist (Have I mentioned that?), but I enjoy riding and I thrive on challenging myself. And this ride will definitely be a challenge. I’ve never ridden this far in a 48-hour period – – not even close! Last summer I averaged about 150 miles per week. But I’ve been ramping up the training and wouldn’t try it if I didn’t think I had a realistic shot at it.
+        <br>
+        <br>
+        I invite you to join me by making a per-mile pledge. It will encourage &amp; inspire me to know that every new mile I cover is making a difference for unborn children &amp; their moms. Will I make it all the way to Lake Erie in 48-hours? I don’t know. But I will do my best! Please do your best for the unborn by making your per-mile pledge today. Then, during the ride, you can track my progress in real-time right on the Community Pregnancy Center’s Facebook page. Your actual donation won’t be collected until after we discover how many miles of “Ernie’s Ride” I was able to complete.
+        <br>
+        <br>
+        Thank you for joining with me to honor my Uncle Ernie &amp; to help new moms and their babies through the Community Pregnancy Center.
+        <br>
+        <br>
+        Godspeed!
+        <br>
+        Doug
+        </p>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="static/css/bs/js/bootstrap.min.js"></script>
+    <script src="static/js/custom.js"></script>
+  </body>
+</html>

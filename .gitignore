@@ -1,0 +1,5 @@
+*.pyc
+venv
+erniesRide.egg-info
+erniesRide/pledges.db
+erniesRide/default_settings.py

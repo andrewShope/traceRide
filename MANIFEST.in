@@ -1,0 +1,3 @@
+graft erniesRide/templates
+graft erniesRide/static
+include erniesRide/schema.sql

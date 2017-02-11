@@ -1,0 +1,144 @@
+.navbar {
+	margin-bottom: 0;
+}
+
+#donationSection {
+}
+
+#donationMessage {
+	min-height: 172px;
+	display: none;
+}
+
+#mileText {
+	color: black;
+	margin-left: 80px;
+	margin-top: 7px;
+	display: block;
+}
+
+#pledgeAmount {
+	width: 5em;
+	float: left;
+}
+
+#pledgeDiv {
+	margin-left: 0px;
+	padding-left: 0px;
+}
+
+#testText {
+	float: right;
+
+}
+.form-group label {
+	color: black;
+}
+
+.form-group {
+	text-align: left;
+}
+
+.cell-background {
+}
+
+#bold-text {
+	font-weight: bold;
+	color: black;
+	font-size: 25px;
+}
+
+.cell-background h2, .cell-background h3 {
+	color: black;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	background: #ffffff;
+	color: #f7f7f7;
+	font-family: 'Montserrat', sans-serif;
+}
+
+h1,
+h2 {
+	font-weight: bold;
+}
+
+p {
+	font-size: 16px;
+	color: #cdcdcd;
+}
+
+.written-content {
+	text-align: center;
+}
+
+.written-content h1, h2, h3, h4 {
+	color: #76323F;
+	font-family: sans-serif;
+}
+
+.written-content h2 {
+	font-size: 25px;
+}
+
+.written-content p {
+	color: #565656;
+	text-align: left;
+}
+
+.main-banner {
+	background-color: #D7CEC7;
+}
+
+.btn-primary {
+	color: #000;
+	background-color: transparent;
+	margin-bottom: 5px;
+}
+
+.btn-primary:hover {
+	color: #27A967;
+	background-color: white;
+}
+
+.navbar-inverse {
+	background: white;
+	border: 0;
+}
+
+.navbar-inverse .navbar-nav li a {
+	color: #76323F;
+	font-size: 16px;
+}
+
+.navbar-inverse .navbar-nav li a:hover {
+	color: #76323F;
+}
+
+.dropdown-menu {
+	background: #2E2F31;
+	border-radius: 0;
+	border: 0;
+}
+
+.dropdown-menu li a {
+	padding: 10px;
+}
+
+.navbar-inverse .navbar-nav .dropdown-menu li a:hover {
+	background: #76323F;
+}
+
+.navbar-inverse .navbar-brand {
+	color: #76323F;
+}
+
+.navbar-inverse .navbar-brand:hover {
+	color: #76323F;
+}
+
+.navbar-header a:hover {
+	color:blue;
+}
