@@ -77,6 +77,9 @@ def login():
 			if request.form['inputPassword'] == app.config['ADMIN_PASSWORD'] and request.form['username'] == app.config['ADMIN_USERNAME']:
 				session['username'] = request.form['username']
 				return redirect(url_for('admin'))
+	if 'username' in session:
+		return redirect(url_for('admin'))
+
 	return render_template("sign_in.html")
 
 @app.route('/admin/dashboard', methods=["POST", "GET"])
