@@ -3,6 +3,7 @@ import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, \
 				jsonify, flash
 import utils
+import bcrypt
 
 
 app = Flask(__name__)
@@ -74,7 +75,7 @@ def login():
 	if request.method == "POST":
 		app.logger.debug(request.form.keys())
 		if 'username' in request.form.keys() and 'inputPassword' in request.form.keys():
-			if request.form['inputPassword'] == app.config['ADMIN_PASSWORD'] and request.form['username'] == app.config['ADMIN_USERNAME']:
+			if bcrypt.checkpw(request.form['inputPassword'].encode(), app.config['ADMIN_PASSWORD']) and request.form['username'] == app.config['ADMIN_USERNAME']:
 				session['username'] = request.form['username']
 				return redirect(url_for('admin'))
 	if 'username' in session:
