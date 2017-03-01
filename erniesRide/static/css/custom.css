@@ -185,3 +185,7 @@ p {
 .center-image {
 	max-width: 50%;
 }
+
+.nav li a:focus {
+	background-color: #76323F;
+}
