@@ -108,10 +108,7 @@ def deleteRows():
 	return jsonify(result="failure")
 	if request.method == "GET":
 		return redirect(url_for('admin'))
-<<<<<<< HEAD
-
+		
 @app.route('/meeternie')
 def meetErnie():
 	return render_template('meet_ernie.html')
-=======
->>>>>>> cac49341dc48c803633d0e67b262df7155f7d2d4
