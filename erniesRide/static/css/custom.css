@@ -95,6 +95,10 @@ p {
 	background-color: #D7CEC7;
 }
 
+.tan-background {
+	background-color: #D7CEC7;
+}
+
 .btn-primary {
 	color: #000;
 	background-color: transparent;
@@ -117,4 +121,16 @@ p {
 
 .navbar-inverse .navbar-brand:hover {
 	color: #76323F;
+}
+
+#erniePicture {
+	max-width: 20%;
+	float: left;
+	margin-right: 7px;
+}
+
+#ernieFamilyPicture {
+	max-width: 75%;
+	margin-left: auto;
+	margin-right: auto;
 }
