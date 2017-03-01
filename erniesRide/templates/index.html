@@ -15,24 +15,28 @@
     <![endif]-->
   </head>
   <body>
-    <nav class="navbar navbar-inverse navbar-static-top">
+    <nav class="navbar navbar-static-top solid-navbar">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">Ernie's Ride 2017</a>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" id="test">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+          <a class="navbar-brand" href="/">Ernie's Ride 2017</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/meeternie">Meet Ernie</a></li>
-            <li><a href="#">Donate</a></li>
+            <li><a href="#" class="header-link">Home</a></li>
+            <li><a href="/meeternie" class="header-link">Meet Ernie</a></li>
           </ul>
         </div>
       </div>
     </nav>
     <div class="container-fluid main-banner">
-      <div class="row img-container">
-        <div class="col-md-12">
-          <img src="static/images/testimg.jpg" class="img-responsive center-block">
-        </div>
+      <div class="row">
+          <img src="static/images/bike.jpg" class="center-block center-image">
       </div>
     </div>
     <div class="container written-content">
@@ -108,7 +112,7 @@
       </div>
     </div>
   </div>
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-default navbar-static-top" id="footer">
       <div class="container">
         <div class="navbar-header">
           <a class="navbar-brand" id="footer-text" href="mailto:dougshope@aol.com">dougshope@aol.com</a>

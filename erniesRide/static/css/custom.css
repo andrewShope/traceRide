@@ -95,10 +95,6 @@ p {
 	background-color: #D7CEC7;
 }
 
-.tan-background {
-	background-color: #D7CEC7;
-}
-
 .btn-primary {
 	color: #000;
 	background-color: transparent;
@@ -124,7 +120,7 @@ p {
 }
 
 #erniePicture {
-	max-width: 20%;
+	max-width: 25%;
 	float: left;
 	margin-right: 7px;
 }
@@ -133,4 +129,59 @@ p {
 	max-width: 75%;
 	margin-left: auto;
 	margin-right: auto;
+	margin-bottom: 10px;
+}
+
+.bordered-images {
+	border-width: 3px;
+	border-style: solid;
+	border-color: #565656;
+}
+
+.solid-navbar {
+	background-color: #76323F;
+}
+
+.solid-navbar .navbar-brand {
+	color: white;
+}
+
+.solid-navbar .navbar-brand:hover {
+	color: white;
+}
+
+.solid-navbar .header-link {
+	color: white;
+}
+
+.solid-navbar .header-link:hover {
+	color: white;
+	background-color: #76323F;
+}
+
+.align-left {
+	float: left;
+}
+
+#meet-ernie-h1 {
+	padding-top: 20px;
+	padding-bottom: 30px;
+	font-size: 50px;
+}
+
+#footer {
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+.navbar-header button {
+	border-color: white;
+}
+
+.navbar-header button .icon-bar {
+	background-color: white;
+}
+
+.center-image {
+	max-width: 50%;
 }
