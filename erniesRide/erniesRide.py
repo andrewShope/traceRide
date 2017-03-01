@@ -75,7 +75,7 @@ def login():
 	if request.method == "POST":
 		app.logger.debug(request.form.keys())
 		if 'username' in request.form.keys() and 'inputPassword' in request.form.keys():
-			if bcrypt.checkpw(request.form['inputPassword'].encode(), app.config['ADMIN_PASSWORD']) and request.form['username'] == app.config['ADMIN_USERNAME']:
+			if bcrypt.checkpw(request.form['inputPassword'].encode(), app.config['ADMIN_PASSWORD'].encode()) and request.form['username'] == app.config['ADMIN_USERNAME']:
 				session['username'] = request.form['username']
 				return redirect(url_for('admin'))
 	if 'username' in session:
@@ -108,7 +108,10 @@ def deleteRows():
 	return jsonify(result="failure")
 	if request.method == "GET":
 		return redirect(url_for('admin'))
+<<<<<<< HEAD
 
 @app.route('/meeternie')
 def meetErnie():
 	return render_template('meet_ernie.html')
+=======
+>>>>>>> cac49341dc48c803633d0e67b262df7155f7d2d4
