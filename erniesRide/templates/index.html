@@ -74,10 +74,30 @@
             <div id="donationSection">
               <form action="javascript: myFunction(); return {};">
             <!-- <form> -->
+            <div class="container same-line-container">
+              <div class="form-group test">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control same-line-input" id="firstName" placeholder="John">
+              </div>
+              <div class="form-group test" id="something">
+                <label for="lastName" id="last-name-label">Last Name</label>
+                <input type="text" class="form-control same-line-input" id="lastName" placeholder="Smith">
+              </div>
+            </div>
               <div class="form-group">
                 <label for="inputEmail">Email Address</label>
                 <input type="email" class="form-control" id="inputEmail" placeholder="Email">
               </div>
+              <div class="container same-line-container">
+              <div class="form-group test">
+                <label for="city">City</label>
+                <input type="text" class="form-control same-line-input" id="city" placeholder="City">
+              </div>
+              <div class="form-group test" id="something">
+                <label for="state" id="last-name-label">State</label>
+                <input type="text" class="form-control same-line-input" id="state" placeholder="OH" maxlength="2">
+              </div>
+            </div>
               <div class="form-group">
                 <label for="pledgeAmount">Pledge Amount (per mile)</label>
                 <div class="container-fluid" id="pledgeDiv">

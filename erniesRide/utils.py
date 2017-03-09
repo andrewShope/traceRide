@@ -26,3 +26,12 @@ def validateCurrency(num):
 		return True
 	else:
 		return False
+
+def validateFields(city, state, firstName, lastName, emailAddress, pledgeAmount):
+	flag = True
+	if not validateEmail(emailAddress):
+		flag = False
+	if not validateCurrency(pledgeAmount):
+		flag = False
+
+	return flag

@@ -53,10 +53,14 @@ def index():
 def pledge():
 	email = request.form['emailAddress']
 	pledge = request.form['pledgeAmount']
-	if utils.validateEmail(email) and utils.validateCurrency(pledge):
+	firstName = request.form['firstName']
+	lastName = request.form['lastName']
+	city = request.form['city']
+	state = request.form['state']
+	if utils.validateFields(firstName, lastName, city, state, email, pledge):
 		db = get_db()
-		db.execute('insert into entries (email, pledge) values (?, ?)',
-			[email, pledge])
+		db.execute('insert into entries (email, pledge, firstName, lastName, city, state) values (?, ?, ?, ?, ? ,?)',
+			[email, pledge, firstName, lastName, city, state])
 		db.commit()
 		pledgeSum = utils.sumPledges(get_db())
 		return jsonify(result='success', total=pledgeSum, pledgeAmount=pledge)

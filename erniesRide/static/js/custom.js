@@ -7,17 +7,43 @@ function validateEmail(email) {
 
 function validateCurrency(num) {
 	if (num > 0)
-		return true
+		return true;
 	else
-		return false
+		return false;
+}
+
+function validateFields(city, state, firstName, lastName, emailAddress, pledgeAmount) {
+	flag = true;
+	if (city === "")
+		flag = false;
+	if (state === "")
+		flag = false;
+	if (firstName === "") 
+		flag = false;
+	if (lastName === "")
+		flag = false;
+	if (validateEmail(emailAddress) === false)
+		flag = false;
+	if (validateCurrency(pledgeAmount) === false)
+		flag = false;
+
+	return flag;
 }
 
 $(document).ready(function(){
 	$("#submitButton").bind("click", function() {
+		city = $("#city").val();
+		state = $("#state").val();
+		firstName = $("#firstName").val();
+		lastName = $("#lastName").val();
 		emailAddress = $("#inputEmail").val();
 		pledgeAmount = $("#pledgeAmount").val();
-		if (validateEmail(emailAddress) && validateCurrency(pledgeAmount)) {
+		if (validateFields(city, state, firstName, lastName, emailAddress, pledgeAmount)) {
 			$.post('/pledge', {
+				firstName: firstName,
+				lastName: lastName,
+				city: city,
+				state: state,
 				pledgeAmount: $("#pledgeAmount").val(),
 				emailAddress: $("#inputEmail").val()
 			}, function(data) {
@@ -32,11 +58,10 @@ $(document).ready(function(){
 
 				}
 				else
-					alert("Something was wrong");
+					alert("There was an error processing your request.");
 			});
 		}
 		else {
-			
 		}
 	});
 

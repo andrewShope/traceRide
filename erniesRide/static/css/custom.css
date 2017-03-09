@@ -199,3 +199,43 @@ p {
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
+
+.test {
+	display: inline-block;
+	float: left;
+	width: 48%;
+	margin-left: 0;
+	padding-left: 0;
+	margin-right: 0;
+	padding-right: 0;
+	/*background-color: red;*/
+}
+
+.same-line-container {
+	margin-left: 0;
+	padding-left: 0;
+	width: 100%;
+	/*background-color: blue;*/
+	padding-right: 0;
+}
+
+.same-line-input {
+	width: 100%;
+}
+
+#something {
+	margin-left: 4%;
+}
+
+#state {
+	width: 20%;
+}
+
+#city: {
+	width: 48%;
+}
+#lastName {
+}
+
+#last-name-label {
+}
