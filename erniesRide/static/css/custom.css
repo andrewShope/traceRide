@@ -7,6 +7,10 @@
 	font-family: 'Montserrat', sans-serif;
 }
 
+#main-img {
+	max-height: 70vh;
+}
+
 #footer-text a {
 	color: white;
 }
@@ -183,8 +187,8 @@ p {
 }
 
 .center-image {
-	width: 100%;
-	max-width: 1000px;
+	/*width: 100%;*/
+	max-width: 100%;
 }
 
 .nav li a:focus {
