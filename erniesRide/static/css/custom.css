@@ -49,6 +49,10 @@
 	text-align: left;
 }
 
+#O2E-logo {
+	height: 300px;
+}
+
 #bold-text {
 	font-weight: bold;
 	color: black;
@@ -167,7 +171,7 @@ p {
 	float: left;
 }
 
-#meet-ernie-h1 {
+.article-title {
 	padding-top: 20px;
 	padding-bottom: 30px;
 	font-size: 50px;
@@ -176,6 +180,7 @@ p {
 #footer {
 	margin-bottom: 0;
 	padding-bottom: 0;
+	margin-top: 20px;
 }
 
 .navbar-header button {
@@ -238,8 +243,75 @@ p {
 #city: {
 	width: 48%;
 }
-#lastName {
+
+.test-notification {
+	height: 50px;
+	width: 100%;
+	background-color: #4858A4;
 }
 
-#last-name-label {
+.recap-left {
+	margin: 15px;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #565656;
+	float: left;
+}
+
+.recap-right {
+	margin: 15px;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #565656;
+	float: right;
+}
+
+.recap-land {
+	width: 25%;
+}
+
+.recap-port {
+	width: 15%;
+}
+
+.recap-center {
+	margin: auto;
+	width: 25%;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #565656;
+}
+
+.font-weight-bold {
+	font-weight: bold;
+}
+
+@media (max-width: 768px) {
+	.recap-right {
+		display: block;
+		margin: auto;
+		float: none;
+		margin-top: 15px;
+		margin-bottom: 15px;
+	}
+
+	.recap-left {
+		display: block;
+		margin: auto;
+		float: none;
+		margin-top: 15px;
+		margin-bottom: 15px;
+	}
+
+	.recap-land {
+		width: 50%;
+	}
+
+	.recap-port {
+		width: 35%;
+	}
+
+	.recap-center {
+		width: 50%;
+	}
 }
