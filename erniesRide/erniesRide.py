@@ -121,6 +121,6 @@ def meetErnie():
 def pastRides():
 	return render_template('past_rides.html')
 
-@app.route('/looking-for-riders')
-def lookingForRiders():
-	return render_template('looking_for_riders.html')
+# @app.route('/looking-for-riders')
+# def lookingForRiders():
+# 	return render_template('looking_for_riders.html')
