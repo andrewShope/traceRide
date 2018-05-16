@@ -6,5 +6,6 @@ create table entries (
 	lastName text not null,
 	city text not null,
 	state text not null,
-	pledge numeric (10, 2) not null
+	pledge numeric (10, 2) not null,
+	riderName text not null
 );
