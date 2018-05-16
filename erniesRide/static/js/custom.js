@@ -38,6 +38,8 @@ $(document).ready(function(){
 		lastName = $("#lastName").val();
 		emailAddress = $("#inputEmail").val();
 		pledgeAmount = $("#pledgeAmount").val();
+		riderName = $("#sponsoredRider option:selected").text();
+		console.log(riderName);
 		if (validateFields(city, state, firstName, lastName, emailAddress, pledgeAmount)) {
 			$.post('/pledge', {
 				firstName: firstName,
@@ -45,7 +47,8 @@ $(document).ready(function(){
 				city: city,
 				state: state,
 				pledgeAmount: $("#pledgeAmount").val(),
-				emailAddress: $("#inputEmail").val()
+				emailAddress: $("#inputEmail").val(),
+				riderName: $("#sponsoredRider option:selected").text()
 			}, function(data) {
 				if (data.result === 'success') {
 					$("#donationSection").fadeOut(2000, function() {

@@ -49,23 +49,24 @@ def index():
 	pledgeSum = utils.sumPledges(get_db())
 	return render_template('index.html', pledgeSum=pledgeSum)
 
-# @app.route('/pledge', methods=["POST"])
-# def pledge():
-# 	email = request.form['emailAddress']
-# 	pledge = request.form['pledgeAmount']
-# 	firstName = request.form['firstName']
-# 	lastName = request.form['lastName']
-# 	city = request.form['city']
-# 	state = request.form['state']
-# 	if utils.validateFields(firstName, lastName, city, state, email, pledge):
-# 		db = get_db()
-# 		db.execute('insert into entries (email, pledge, firstName, lastName, city, state) values (?, ?, ?, ?, ? ,?)',
-# 			[email, pledge, firstName, lastName, city, state])
-# 		db.commit()
-# 		pledgeSum = utils.sumPledges(get_db())
-# 		return jsonify(result='success', total=pledgeSum, pledgeAmount=pledge)
-# 	else:
-# 		return jsonify(result='failure')
+@app.route('/pledge', methods=["POST"])
+def pledge():
+	email = request.form['emailAddress']
+	pledge = request.form['pledgeAmount']
+	firstName = request.form['firstName']
+	lastName = request.form['lastName']
+	city = request.form['city']
+	state = request.form['state']
+	riderName = request.form['riderName']
+	if utils.validateFields(firstName, lastName, city, state, email, pledge):
+		db = get_db()
+		db.execute('insert into entries (email, pledge, firstName, lastName, city, state, riderName) values (?, ?, ?, ?, ? ,?, ?)',
+			[email, pledge, firstName, lastName, city, state, riderName])
+		db.commit()
+		pledgeSum = utils.sumPledges(get_db())
+		return jsonify(result='success', total=pledgeSum, pledgeAmount=pledge)
+	else:
+		return jsonify(result='failure')
 
 @app.route('/view')
 def show_entries():
@@ -93,7 +94,7 @@ def admin():
 		pass
 	if 'username' in session:
 		db = get_db()
-		cur = db.execute('select id, email, pledge, firstName, lastName, city, state from entries order by id asc')
+		cur = db.execute('select id, email, pledge, firstName, lastName, city, state, riderName from entries order by id asc')
 		entries = cur.fetchall()
 
 		return render_template('admin_panel.html', entries=entries)

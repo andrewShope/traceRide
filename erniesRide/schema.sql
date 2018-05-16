@@ -9,3 +9,8 @@ create table entries (
 	pledge numeric (10, 2) not null,
 	riderName text not null
 );
+
+create table riders (
+	id integer primary key autoincrement,
+	riderName
+);
