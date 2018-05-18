@@ -11,7 +11,7 @@
           <h1>Ernie's Ride</h1>
           <img src="static/images/O2E_LogoWithText-01.png" class="img-responsive center-block" id="O2E-logo">
           <p>
-          Ernie’s Ride 2018 is an unsupported (no assistance vehicle) ride on August 3-5 (Friday – Sunday).  This challenging ride is an event created to raise funds, prayers, and awareness for two pro-life women’s centers here in Warren &amp; Butler Counties.  The Community Pregnancy Center has locations in Middletown and Franklin, while Elizabeth’s New Life Center is located in my hometown, Lebanon.
+          Ernie’s Ride 2018 is an unsupported (no assistance vehicle) ride on August 3-5 (Friday – Sunday).  This challenging ride is an event created to raise funds, prayers, and awareness for two pro-life women’s centers here in Warren &amp; Butler Counties.  The Community Pregnancy Center is located in Middletown, OH, while Elizabeth's New Life Center is located in my hometown, Lebanon, OH.
           <br>
           <br>
           The premise of the ride is very straight-forward:  Riders complete as much of the 320-mile distance between the Ohio River, in Cincinnati, and Lake Erie, in Cleveland, during the 3-day event.  You, if you’d like, sponsor a rider a set amount per mile.  When the weekend is over, you make your donation directly to the Center you have chosen based on the total number of miles (320-mile max) your sponsored rider has covered. 
@@ -52,8 +52,9 @@
               <label for="sponsoredRider">Select which rider you would like to sponsor:</label>
               <select class="form-control" id="sponsoredRider">
                 <option value="none"></option>
-                <option value="riderOne">Doug Shope</option>
-                <option value="riderTwo">Bob Smith</option>
+                {% for rider in riders %}
+                  <option>{{rider.riderName}}</option>
+                {% endfor %}
               </select>
             </div>
             <div class="container same-line-container">
@@ -101,7 +102,7 @@
         <br>
         <img src="static/images/state-map.jpg" class="img-responsive center-block">
         <br>
-        <p>This 3-day event is August 3-5 (Friday – Sunday).  Riders are required to obtain sponsors totaling at least $2.00 per mile.  This is pretty easy to do using social media.  Riders are responsible for all of their own food &amp; lodging over the 3 days &amp; two nights.  No sponsored monies are used for the riders’ expenses.  So, it is quite a sacrifice, but it is well worth it.  The follows the route of the Ohio to Erie Trail which is dedicated bike trail about 85% of the way and a few roads for the remaining miles.  Most of the roads we cycle are lightly travelled by cars and a premium is placed on cyclist safety.</p>
+        <p>This 3-day event is August 3-5 (Friday – Sunday).  Riders are required to obtain sponsors totaling at least $2.00 per mile.  This is pretty easy to do using social media.  Riders are responsible for all of their own food &amp; lodging over the 3 days &amp; two nights.  No sponsored monies are used for the riders’ expenses.  So, it is quite a sacrifice, but it is well worth it.  The ride follows the route of the Ohio to Erie Trail which is dedicated bike trail about 85% of the way and a few roads for the remaining miles.  Most of the roads we cycle are lightly travelled by cars and a premium is placed on cyclist safety.</p>
         <br>
         <p>Friday departs from Paul Brown Stadium at 6:00 AM and covers about 112 miles to Columbus.  Saturday departs the hotel in Columbus and covers about 103 miles to Millersburg, Ohio.  On Sunday, we depart our hotel in Millersburg and cover the final 105 miles to Edgewater Park on Lake Erie in Cleveland.  Stops are made daily as needed for rest, refueling, and recharging.  In 2017, the stops were (in order) Spring Valley, London, Columbus, Sunbury, Mount Vernon, Millersburg, Canal Fulton, Peninsula, and Cleveland.</p>
         <br>

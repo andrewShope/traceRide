@@ -12,5 +12,5 @@ create table entries (
 
 create table riders (
 	id integer primary key autoincrement,
-	riderName
+	riderName text not null
 );

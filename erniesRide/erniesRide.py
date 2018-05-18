@@ -47,7 +47,10 @@ def close_db(error):
 @app.route('/')
 def index():
 	pledgeSum = utils.sumPledges(get_db())
-	return render_template('index.html', pledgeSum=pledgeSum)
+	db = get_db()
+	cur = db.execute('select riderName from riders order by riderName asc')
+	riders = cur.fetchall()
+	return render_template('index.html', pledgeSum=pledgeSum, riders=riders)
 
 @app.route('/pledge', methods=["POST"])
 def pledge():
@@ -101,6 +104,19 @@ def admin():
 	else:
 		return redirect(url_for('login'))
 
+@app.route('/admin/manage-riders', methods=["POST", "GET"])
+def manageRiders():
+	if request.method == "POST":
+		pass
+	if 'username' in session:
+		db = get_db()
+		cur = db.execute('select id, riderName from riders order by id asc')
+		riders = cur.fetchall()
+
+		return render_template('manage_riders.html', riders=riders)
+	else:
+		return redirect(url_for('login'))
+
 @app.route('/delete', methods=["POST", "GET"])
 def deleteRows():
 	if request.method == "POST":
@@ -113,6 +129,28 @@ def deleteRows():
 	return jsonify(result="failure")
 	if request.method == "GET":
 		return redirect(url_for('admin'))
+
+@app.route('/add-rider', methods=["POST", "GET"])
+def addRider():
+	if request.method == "POST":
+		if 'username' in session:
+			db = get_db()
+			newRiderName = request.form['riderName']
+			cur = db.execute('insert into riders (riderName) values (?)', [newRiderName])
+			db.commit()
+
+@app.route('/delete-riders', methods=["POST", "GET"])
+def deleteRider():
+	if request.method == "POST":
+		if 'username' in session:
+			db = get_db()
+			for entry in request.form.getlist("ids[]"):
+				cur = db.execute('delete from riders where id = ?', (entry, ))
+			db.commit()
+			return jsonify(result="success")
+	if request.method == "GET":
+		return redirect(url_for('manageRiders'))
+
 		
 @app.route('/meeternie')
 def meetErnie():
@@ -121,7 +159,3 @@ def meetErnie():
 @app.route('/past-rides')
 def pastRides():
 	return render_template('past_rides.html')
-
-# @app.route('/looking-for-riders')
-# def lookingForRiders():
-# 	return render_template('looking_for_riders.html')
