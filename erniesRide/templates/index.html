@@ -72,14 +72,22 @@
                 <input type="text" class="form-control same-line-input" id="state" placeholder="OH" maxlength="2">
               </div>
             </div>
-            
+
             <div class="form-group">
-              <label for="sponsoredRider">Select which rider you would like to sponsor:</label>
+              <label for="sponsoredRider">Rider you wish to sponsor:</label>
               <select class="form-control" id="sponsoredRider">
                 <option value="none"></option>
                 {% for rider in riders %}
                   <option>{{rider.riderName}}</option>
                 {% endfor %}
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="donationCenter">Center to which you wish to donate:</label>
+              <select class="form-control" id="donationCenter">
+                <option value="none"></option>
+                <option>Community Pregnancy Center</option>
+                <option>Elizabeth's New Life Center</option>
               </select>
             </div>
               <div class="form-group">
