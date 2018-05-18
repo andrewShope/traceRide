@@ -121,4 +121,16 @@
       </div>
     </div>
   </div>
+  <script type="text/javascript">
+    window.riderPledges = {
+      {% for key, value in riderPledges.items() %}
+        "{{ key|e }}": {{ value|e }},
+      {% endfor %}
+    }
+    window.centerPledges = {
+      {% for key, value in centerPledges.items() %}
+        "{{ key|e }}": {{ value|e }},
+      {% endfor %}
+    }
+  </script>
 {% endblock %}

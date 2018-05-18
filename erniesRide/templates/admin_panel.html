@@ -71,6 +71,7 @@
                   <th>Last Name</th>
                   <th>City</th>
                   <th>State</th>
+                  <th>Donation Center</th>
                   <th>Delete?</th>
                 </tr>
               </thead>
@@ -85,10 +86,12 @@
                   <td> {{ entry.lastName }} </td>
                   <td> {{ entry.city }} </td>
                   <td> {{ entry.state }} </td>
+                  <td> {{ entry.donationCenter }} </td>
                   <td> <input type="checkbox" id="{{entry.id}}" class="deleteBox"> </td>
               {% endfor %}
                 </tr>
                 <tr>
+                  <td></td>
                   <td></td>
                   <td></td>
                   <td></td>

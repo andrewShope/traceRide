@@ -46,11 +46,14 @@ def close_db(error):
 
 @app.route('/')
 def index():
-	pledgeSum = utils.sumPledges(get_db())
+	pledgeSum = utils.sumTotal(get_db())
 	db = get_db()
 	cur = db.execute('select riderName from riders order by riderName asc')
 	riders = cur.fetchall()
-	return render_template('index.html', pledgeSum=pledgeSum, riders=riders)
+	centerPledges = utils.centerSums(get_db())
+	riderPledges = utils.riderSums(get_db())
+	return render_template('index.html', pledgeSum=pledgeSum, riders=riders, 
+							centerPledges=centerPledges, riderPledges=riderPledges)
 
 @app.route('/pledge', methods=["POST"])
 def pledge():
@@ -61,10 +64,11 @@ def pledge():
 	city = request.form['city']
 	state = request.form['state']
 	riderName = request.form['riderName']
+	donationCenter = request.form['donationCenter']
 	if utils.validateFields(firstName, lastName, city, state, email, pledge):
 		db = get_db()
-		db.execute('insert into entries (email, pledge, firstName, lastName, city, state, riderName) values (?, ?, ?, ?, ? ,?, ?)',
-			[email, pledge, firstName, lastName, city, state, riderName])
+		db.execute('insert into entries (email, pledge, firstName, lastName, city, state, riderName, donationCenter) values (?, ?, ?, ?, ? ,?, ?, ?)',
+			[email, pledge, firstName, lastName, city, state, riderName, donationCenter])
 		db.commit()
 		pledgeSum = utils.sumPledges(get_db())
 		return jsonify(result='success', total=pledgeSum, pledgeAmount=pledge)
@@ -97,7 +101,7 @@ def admin():
 		pass
 	if 'username' in session:
 		db = get_db()
-		cur = db.execute('select id, email, pledge, firstName, lastName, city, state, riderName from entries order by id asc')
+		cur = db.execute('select id, email, pledge, firstName, lastName, city, state, riderName, donationCenter from entries order by id asc')
 		entries = cur.fetchall()
 
 		return render_template('admin_panel.html', entries=entries)

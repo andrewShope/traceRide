@@ -39,16 +39,17 @@ $(document).ready(function(){
 		emailAddress = $("#inputEmail").val();
 		pledgeAmount = $("#pledgeAmount").val();
 		riderName = $("#sponsoredRider option:selected").text();
-		console.log(riderName);
+		donationCenter = $("#donationCenter option:selected").text();
 		if (validateFields(city, state, firstName, lastName, emailAddress, pledgeAmount)) {
 			$.post('/pledge', {
 				firstName: firstName,
 				lastName: lastName,
 				city: city,
 				state: state,
-				pledgeAmount: $("#pledgeAmount").val(),
-				emailAddress: $("#inputEmail").val(),
-				riderName: $("#sponsoredRider option:selected").text()
+				pledgeAmount: pledgeAmount,
+				emailAddress: emailAddress,
+				riderName: riderName,
+				donationCenter: donationCenter
 			}, function(data) {
 				if (data.result === 'success') {
 					$("#donationSection").fadeOut(2000, function() {
