@@ -82,4 +82,20 @@ $(document).ready(function(){
 		else
 			$("#mileText").text(message + "$" + String(value) + " Maximum Possible Pledge");
 	});
+
+	$("#sponsoredRider").change(function () {
+		if (window.riderPledges[$("#sponsoredRider option:selected").text()] == undefined) {
+			$("#riderSum").text("0.00");
+		} else {
+		$("#riderSum").text(window.riderPledges[$("#sponsoredRider option:selected").text()].toFixed(2));
+		}	
+	});
+
+	$("#donationCenter").change(function () {
+		if (window.centerPledges[$("#donationCenter option:selected").text()] == undefined) {
+			$("#centerSum").text("0.00");
+		} else {
+		$("#centerSum").text(window.centerPledges[$("#donationCenter option:selected").text()].toFixed(2));
+		}	
+	});
 });

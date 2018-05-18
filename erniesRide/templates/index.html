@@ -9,10 +9,10 @@
       <div class="row">
         <div class="col-md-6">
           <h1>Ernie's Ride</h1>
-          <img src="static/images/O2E_LogoWithText-01.png" class="img-responsive center-block" id="O2E-logo">
           <p>
           Ernie’s Ride 2018 is an unsupported (no assistance vehicle) ride on August 3-5 (Friday – Sunday).  This challenging ride is an event created to raise funds, prayers, and awareness for two pro-life women’s centers here in Warren &amp; Butler Counties.  The Community Pregnancy Center is located in Middletown, OH, while Elizabeth's New Life Center is located in my hometown, Lebanon, OH.
           <br>
+          <img src="static/images/O2E_LogoWithText-01.png" class="img-responsive center-block" id="O2E-logo">
           <br>
           The premise of the ride is very straight-forward:  Riders complete as much of the 320-mile distance between the Ohio River, in Cincinnati, and Lake Erie, in Cleveland, during the 3-day event.  You, if you’d like, sponsor a rider a set amount per mile.  When the weekend is over, you make your donation directly to the Center you have chosen based on the total number of miles (320-mile max) your sponsored rider has covered. 
           <br>
@@ -34,15 +34,8 @@
         <div class="col-md-6" id="state-map">
           <h1>Sponsor</h1>
             <p>
-            All of the funds raised will go to support the Community Pregnancy Center with locations in Middletown and Franklin, Ohio.  CPC is a Christ-centered organization offering pregnancy tests for those who might be expecting; a 15-week Mom2 Be program teaching prenatal care &amp; nutrition, prenatal development, newborn care &amp; more; Ultrasounds; a Dad2Be program to assist young men as they prepare for fatherhood; and compassionate care &amp; support for post-abortive mothers &amp; fathers; and a Care Closet supplying diapers, formula, clothing, and other necessities at no cost.  Please sponsor &amp; give thoughtfully &amp; generously when we begin receiving sponsorship pledges April 1st.
-            <br>
-            <br>
-            For more info on CPC, please visit their website at <a href="http://www.pregnancychoice.net/">www.pregancychoice.net</a>
-            <img src="static/images/cpc_logo.png" class="img-responsive center-block" id="cpc-logo">
             After the Ride is completed, and the miles have been tallied, you will be contacted with the total amount of your pledge and a link for payment.  Contact will be made via the email address that you leave below.  All gifts are tax-deductible &amp; confidential.
             </p>
-            <br>
-            <p class="bold-text">We will begin accepting pledges shortly!</p>
             <br>
 
             <div id="donationSection">
@@ -101,7 +94,9 @@
             </div>
           <div class="cell-background">
             <br><br><div id="donationMessage"></div>
-            <p class="bold-text">Total Currently Pledged: $<span id="pledgeSum">{{ pledgeSum }}</span>/mi</p>
+            <p class="bold-text">Total Pledged for this Rider: $<span id="riderSum">0.00</span>/mi</p>
+            <p class="bold-text">Total Pledged for this Center: $<span id="centerSum">0.00</span>/mi</p>
+            <p class="bold-text">Total Pledged for Ernie's Ride 2018: $<span id="pledgeSum">{{ pledgeSum }}</span>/mi</p>
           </div>
         </div>
       </div>
@@ -129,7 +124,7 @@
     }
     window.centerPledges = {
       {% for key, value in centerPledges.items() %}
-        "{{ key|e }}": {{ value|e }},
+        "{{ key|safe }}": {{ value|e }},
       {% endfor %}
     }
   </script>

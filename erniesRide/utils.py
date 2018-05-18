@@ -33,13 +33,11 @@ def riderSums(db):
 	"""
 	riderDict = {}
 	riders = getRiders(db)
-	print(riders[0][0])
 	for rider in riders:
 		cur = db.execute("select pledge from entries where riderName=(?)", [rider[0]])
 		pledges = cur.fetchall()
 		riderDict[rider[0]] = sumPledges(pledges)
 
-	print(riderDict)
 	return riderDict
 
 def centerSums(db):
@@ -50,7 +48,6 @@ def centerSums(db):
 		pledges = cur.fetchall()
 		centerDict[center] = sumPledges(pledges)
 
-	print(centerDict)
 	return centerDict
 
 def validateEmail(emailAddress):

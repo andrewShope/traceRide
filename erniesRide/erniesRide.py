@@ -70,7 +70,7 @@ def pledge():
 		db.execute('insert into entries (email, pledge, firstName, lastName, city, state, riderName, donationCenter) values (?, ?, ?, ?, ? ,?, ?, ?)',
 			[email, pledge, firstName, lastName, city, state, riderName, donationCenter])
 		db.commit()
-		pledgeSum = utils.sumPledges(get_db())
+		pledgeSum = utils.sumTotal(get_db())
 		return jsonify(result='success', total=pledgeSum, pledgeAmount=pledge)
 	else:
 		return jsonify(result='failure')
@@ -163,3 +163,11 @@ def meetErnie():
 @app.route('/past-rides')
 def pastRides():
 	return render_template('past_rides.html')
+
+@app.route('/about-elizabeths-new-life-center')
+def aboutENLC():
+	return render_template('enlc.html')
+
+@app.route('/about-community-pregnancy-center')
+def aboutCPC():
+	return render_template('cpc.html')
