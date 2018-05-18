@@ -7,7 +7,8 @@ create table entries (
 	city text not null,
 	state text not null,
 	pledge numeric (10, 2) not null,
-	riderName text not null
+	riderName text not null,
+	donationCenter text not null
 );
 
 create table riders (
