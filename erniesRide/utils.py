@@ -60,11 +60,31 @@ def validateCurrency(num):
 	else:
 		return False
 
-def validateFields(city, state, firstName, lastName, emailAddress, pledgeAmount):
+def validateFields(city, state, firstName, lastName, emailAddress, pledgeAmount, riderName, donationCenter, db):
 	flag = True
 	if not validateEmail(emailAddress):
 		flag = False
 	if not validateCurrency(pledgeAmount):
 		flag = False
+	if not validateCenter(donationCenter):
+		flag = False
+	if not validateRider(riderName, db):
+		flag = False
 
 	return flag
+
+def validateCenter(centerName):
+	centers = ["Elizabeth's New Life Center", "Community Pregnancy Center"]
+	if centerName in centers:
+		return True
+	else:
+		return False
+
+def validateRider(riderName, db):
+	riders = getRiders(db)
+	namesList = [rider[0] for rider in riders]
+	if riderName in namesList:
+		return True
+	else:
+		return False
+

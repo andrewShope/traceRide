@@ -12,8 +12,8 @@ function validateCurrency(num) {
 		return false;
 }
 
-function validateFields(city, state, firstName, lastName, emailAddress, pledgeAmount) {
-	flag = true;
+function validateFields(city, state, firstName, lastName, emailAddress, pledgeAmount, riderName, donationCenter) {
+	var flag = true;
 	if (city === "")
 		flag = false;
 	if (state === "")
@@ -25,6 +25,10 @@ function validateFields(city, state, firstName, lastName, emailAddress, pledgeAm
 	if (validateEmail(emailAddress) === false)
 		flag = false;
 	if (validateCurrency(pledgeAmount) === false)
+		flag = false;
+	if (riderName === "")
+		flag = false;
+	if (donationCenter === "")
 		flag = false;
 
 	return flag;
@@ -40,7 +44,7 @@ $(document).ready(function(){
 		pledgeAmount = $("#pledgeAmount").val();
 		riderName = $("#sponsoredRider option:selected").text();
 		donationCenter = $("#donationCenter option:selected").text();
-		if (validateFields(city, state, firstName, lastName, emailAddress, pledgeAmount)) {
+		if (validateFields(city, state, firstName, lastName, emailAddress, pledgeAmount, riderName, donationCenter)) {
 			$.post('/pledge', {
 				firstName: firstName,
 				lastName: lastName,
@@ -66,6 +70,7 @@ $(document).ready(function(){
 			});
 		}
 		else {
+			alert("Please check your information and try again.")
 		}
 	});
 

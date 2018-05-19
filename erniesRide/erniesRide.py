@@ -65,7 +65,7 @@ def pledge():
 	state = request.form['state']
 	riderName = request.form['riderName']
 	donationCenter = request.form['donationCenter']
-	if utils.validateFields(firstName, lastName, city, state, email, pledge):
+	if utils.validateFields(firstName, lastName, city, state, email, pledge, riderName, donationCenter, get_db()):
 		db = get_db()
 		db.execute('insert into entries (email, pledge, firstName, lastName, city, state, riderName, donationCenter) values (?, ?, ?, ?, ? ,?, ?, ?)',
 			[email, pledge, firstName, lastName, city, state, riderName, donationCenter])
@@ -163,6 +163,10 @@ def meetErnie():
 @app.route('/past-rides')
 def pastRides():
 	return render_template('past_rides.html')
+
+@app.route('/past-rides/2014')
+def ride2014():
+	return render_template('ride_2014.html')
 
 @app.route('/about-elizabeths-new-life-center')
 def aboutENLC():
