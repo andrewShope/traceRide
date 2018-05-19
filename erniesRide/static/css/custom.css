@@ -1,6 +1,36 @@
+.body-container {
+	min-height: calc(100vh - 111px);
+	padding: 0;
+	margin: 0;
+}
+
 .navbar-default {
 	background-color: #76323F;
 }
+
+/*Navbar Dropdown Elements*/
+
+ul .dropdown a:hover {
+	background-color: #76323F;
+}
+
+ul .dropdown a {
+	color: white;
+}
+
+.nav .open a:focus {
+	background-color: #76323F;
+}
+
+.nav .open a {
+	background-color: #76323F;
+}
+
+.nav .open a:hover {
+	background-color: #76323F;
+}
+
+/****************************/
 
 #footer-text {
 	color: white;

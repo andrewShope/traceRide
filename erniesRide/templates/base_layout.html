@@ -27,14 +27,21 @@
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/" class="header-link">Home</a></li>
             <li><a href="/meeternie" class="header-link">Meet Ernie</a></li>
-            <li><a href="/past-rides" class="header-link">Past Rides</a></li>
+            <li class="dropdown"><a href="#" id="thisThing" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Past Rides <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/past-rides">2017</a></li>
+                <li><a href="/past-rides/2014">2014</a></li>
+              </ul>
+            </li>
             <li><a href="/about-elizabeths-new-life-center" class="header-link">Elizabeth's New Life Centers</a></li>
             <li><a href="/about-community-pregnancy-center" class="header-link">Community Pregnancy Center</a></li>
           </ul>
         </div>
       </div>
     </nav>
+    <div class="body-container">
     {% block body %}{% endblock %}
+    </div>
     <nav class="navbar navbar-default navbar-static-top" id="footer">
       <div class="container">
         <div class="navbar-header">
