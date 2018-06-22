@@ -272,7 +272,7 @@ p {
 }
 
 #city: {
-	width: 48%;
+	width: 100%;
 }
 
 .test-notification {
@@ -375,5 +375,9 @@ p {
 
 	.recap-center {
 		width: 50%;
+	}
+
+	#state {
+		width: 35%;
 	}
 }
