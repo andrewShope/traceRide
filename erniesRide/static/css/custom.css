@@ -343,6 +343,11 @@ p {
 	padding-bottom: 20px;
 }
 
+.rider-pictures {
+	max-height: 400px;
+	margin-bottom: 20px;
+}
+
 @media (max-width: 768px) {
 	.recap-right {
 		display: block;
