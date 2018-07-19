@@ -1,11 +1,19 @@
-var donationMessageText = "Thanks for your pledge! We will email you shortly to confirm.";
+var donationMessageText = "Thanks for your pledge! We will be sending you a confirmation email shortly!";
 
 function validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 }
 
+function stripDollarSign(pledgeString) {
+	if (pledgeString.startsWith("$"))
+		pledgeString = pledgeString.slice(1);
+	return pledgeString;
+}
+
 function validateCurrency(num) {
+	num = stripDollarSign(num);
+
 	if (num > 0)
 		return true;
 	else
@@ -42,6 +50,7 @@ $(document).ready(function(){
 		lastName = $("#lastName").val();
 		emailAddress = $("#inputEmail").val();
 		pledgeAmount = $("#pledgeAmount").val();
+		pledgeAmount = stripDollarSign(pledgeAmount);
 		riderName = $("#sponsoredRider option:selected").text();
 		donationCenter = $("#donationCenter option:selected").text();
 		if (validateFields(city, state, firstName, lastName, emailAddress, pledgeAmount, riderName, donationCenter)) {
@@ -103,4 +112,80 @@ $(document).ready(function(){
 		$("#centerSum").text(window.centerPledges[$("#donationCenter option:selected").text()].toFixed(2));
 		}	
 	});
+
+	// FORM VALIDATION
+
+	$("#firstName").on("keyup", function () {
+		if ($("#firstName").val().length > 0) {
+			$("#firstName").parent().addClass("has-success");
+			$("#firstName").parent().removeClass("has-error");
+		} else {
+			$("#firstName").parent().addClass("has-error");
+		}
+	});
+
+	$("#lastName").on("keyup", function () {
+		if ($("#lastName").val().length > 0) {
+			$("#lastName").parent().addClass("has-success");
+			$("#lastName").parent().removeClass("has-error");
+		} else {
+			$("#lastName").parent().addClass("has-error");
+		}
+	});
+
+	$("#city").on("keyup", function () {
+		if ($("#city").val().length > 0) {
+			$("#city").parent().addClass("has-success");
+			$("#city").parent().removeClass("has-error");
+		} else {
+			$("#city").parent().addClass("has-error");
+		}
+	});
+
+	$("#state").on("keyup", function () {
+		if ($("#state").val().length > 0) {
+			$("#state").parent().addClass("has-success");
+			$("#state").parent().removeClass("has-error");
+		} else {
+			$("#state").parent().addClass("has-error");
+		}
+	});
+
+	$("#inputEmail").on("keyup", function () {
+		if (!validateEmail($("#inputEmail").val())) {
+			$("#inputEmail").parent().addClass("has-error");
+		} else {
+			$("#inputEmail").parent().removeClass("has-error");
+			$("#inputEmail").parent().addClass("has-success");
+		}
+	});
+
+	$("#sponsoredRider").change(function () {
+		if ($("#sponsoredRider option:selected").text() === "") {
+			$("#sponsoredRider").parent().addClass("has-error");
+		} else {
+			$("#sponsoredRider").parent().removeClass("has-error");
+			$("#sponsoredRider").parent().addClass("has-success");
+		}	
+	});
+
+	$("#donationCenter").change(function () {
+		if ($("#donationCenter option:selected").text() === "") {
+			$("#donationCenter").parent().addClass("has-error");
+		} else {
+			$("#donationCenter").parent().removeClass("has-error");
+			$("#donationCenter").parent().addClass("has-success");
+		}	
+	});
+
+	$("#pledgeAmount").on("keyup", function () {
+		if (validateCurrency($("#pledgeAmount").val())) {
+			$("#pledgeAmount").parent().removeClass("has-error");
+			$("#pledgeAmount").parent().addClass("has-success");
+		} else {
+			$("#pledgeAmount").parent().addClass("has-error");
+		}
+	});
+
 });
+
