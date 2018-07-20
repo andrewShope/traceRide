@@ -1,5 +1,13 @@
 var donationMessageText = "Thanks for your pledge! We will be sending you a confirmation email shortly!";
 
+var errorFieldList = ["#firstName-error", "#lastName-error", "#city-error", "#state-error", 
+					  "#email-error", "#riderName-error", "#donationCenter-error", "#pledgeAmount-error"];
+
+function hideAllErrorFields() {
+	for (var ID of errorFieldList) {
+		$(ID).css("display", "none");
+	}
+}
 function validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
@@ -20,40 +28,72 @@ function validateCurrency(num) {
 		return false;
 }
 
+function showErrorPrompts(errorData) {
+	var ID = "";
+	hideAllErrorFields();
+	for (var errorID of errorData) {
+		ID = "#" + errorID + "-error";
+		$(ID).css("display", "block");
+	}
+}
+
 function validateFields(city, state, firstName, lastName, emailAddress, pledgeAmount, riderName, donationCenter) {
 	var flag = true;
-	if (city === "")
-		flag = false;
-	if (state === "")
-		flag = false;
-	if (firstName === "") 
-		flag = false;
-	if (lastName === "")
-		flag = false;
-	if (validateEmail(emailAddress) === false)
-		flag = false;
-	if (validateCurrency(pledgeAmount) === false)
-		flag = false;
-	if (riderName === "")
-		flag = false;
-	if (donationCenter === "")
-		flag = false;
+	var errorFields = [];
 
-	return flag;
+	if (city === "") {
+		flag = false;
+		errorFields.push("city");
+	}
+	if (state === "") {
+		flag = false;
+		errorFields.push("state");
+	}
+	if (firstName === "") {
+		flag = false;
+		errorFields.push("firstName");
+	}
+	if (lastName === "") {
+		flag = false;
+		errorFields.push("lastName");
+	}
+	if (validateEmail(emailAddress) === false) {
+		flag = false;
+		errorFields.push("email");
+	}
+	if (validateCurrency(pledgeAmount) === false) {
+		flag = false;
+		errorFields.push("pledgeAmount");
+	}
+	if (riderName === "") {
+		flag = false;
+		errorFields.push("riderName");
+	}
+	if (donationCenter === "") {
+		flag = false;
+		errorFields.push("donationCenter");
+	}
+
+	return [flag, errorFields];
 }
 
 $(document).ready(function(){
 	$("#submitButton").bind("click", function() {
-		city = $("#city").val();
-		state = $("#state").val();
-		firstName = $("#firstName").val();
-		lastName = $("#lastName").val();
-		emailAddress = $("#inputEmail").val();
-		pledgeAmount = $("#pledgeAmount").val();
-		pledgeAmount = stripDollarSign(pledgeAmount);
-		riderName = $("#sponsoredRider option:selected").text();
-		donationCenter = $("#donationCenter option:selected").text();
-		if (validateFields(city, state, firstName, lastName, emailAddress, pledgeAmount, riderName, donationCenter)) {
+		var city = $("#city").val();
+		var state = $("#state").val();
+		var firstName = $("#firstName").val();
+		var lastName = $("#lastName").val();
+		var emailAddress = $("#inputEmail").val();
+		var pledgeAmount = $("#pledgeAmount").val();
+		var pledgeAmount = stripDollarSign(pledgeAmount);
+		var riderName = $("#sponsoredRider option:selected").text();
+		var donationCenter = $("#donationCenter option:selected").text();
+
+		var checkData= validateFields(city, state, firstName, lastName, emailAddress, pledgeAmount, riderName, donationCenter);
+		var flag = checkData[0];
+		var errorData = checkData[1];
+
+		if (flag) {
 			$.post('/pledge', {
 				firstName: firstName,
 				lastName: lastName,
@@ -67,8 +107,8 @@ $(document).ready(function(){
 				if (data.result === 'success') {
 					$("#donationSection").fadeOut(2000, function() {
 						$("#donationMessage").append("<p>" + "Thank you for your pledge of \
-							$" + data.pledgeAmount + " per mile. We will send you an email \
-						to confirm." + "</p>");
+							$" + data.pledgeAmount + " per mile. We will be sending you a \
+						confirmation email shortly!" + "</p>");
 						$("#donationMessage").css("display", "block");
 					});
 					$("#pledgeSum").text(data.total)
@@ -79,7 +119,7 @@ $(document).ready(function(){
 			});
 		}
 		else {
-			alert("Please check your information and try again.")
+			showErrorPrompts(errorData);
 		}
 	});
 
