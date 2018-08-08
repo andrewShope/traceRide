@@ -355,6 +355,11 @@ p {
 	margin-bottom: 20px;
 }
 
+.caption-text {
+	text-align: center;
+	font-size: 12px;
+}
+
 @media (max-width: 768px) {
 	.recap-right {
 		display: block;
