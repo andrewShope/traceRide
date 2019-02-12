@@ -7,7 +7,7 @@ import bcrypt
 
 
 app = Flask(__name__)
-app.config.from_object('default_settings.BaseConfig')
+app.config.from_object('erniesRide_settings.BaseConfig')
 app.config.update(dict(
 	DATABASE=os.path.join(app.root_path, 'pledges.db'),
 	))
@@ -164,6 +164,10 @@ def meetErnie():
 def pastRides():
 	return render_template('past_rides.html')
 
+@app.route('/past-rides/2017')
+def ride2017():
+	return render_template('ride_2017.html')
+	
 @app.route('/past-rides/2014')
 def ride2014():
 	return render_template('ride_2014.html')
