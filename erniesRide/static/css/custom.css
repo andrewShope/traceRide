@@ -282,16 +282,23 @@ p {
 }
 
 .recap-left {
-	margin: 15px;
-	border-width: 2px;
+	margin-right: 15px;
+	margin-left: 0px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	border-width: 0px;
 	border-style: solid;
 	border-color: #565656;
 	float: left;
 }
 
 .recap-right {
+/*	margin-left: 15px;
+	margin-right: 0px;
+	margin-top: 15px;
+	margin-bottom: 15px;*/
 	margin: 15px;
-	border-width: 2px;
+	border-width: 0px;
 	border-style: solid;
 	border-color: #565656;
 	float: right;
@@ -311,6 +318,18 @@ p {
 	border-width: 2px;
 	border-style: solid;
 	border-color: #565656;
+}
+
+.recap-bottom {
+	margin: auto;
+	width: 75%;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #565656;
+}
+
+.rotate-ninety {
+	transform: rotate(90deg);
 }
 
 .font-weight-bold {
@@ -358,6 +377,14 @@ p {
 .caption-text {
 	text-align: center;
 	font-size: 12px;
+}
+
+.timeline-text {
+	text-align: center;
+	font-color: black;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	font-weight: bold;
 }
 
 @media (max-width: 768px) {
