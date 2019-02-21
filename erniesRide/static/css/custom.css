@@ -8,6 +8,10 @@
 	background-color: #76323F;
 }
 
+.bold {
+	font-weight: bold;
+}
+
 /*Navbar Dropdown Elements*/
 
 ul .dropdown a:hover {
