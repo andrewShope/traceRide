@@ -424,3 +424,7 @@ p {
 		width: 35%;
 	}
 }
+
+#testContainer {
+	margin: 0 auto;
+}
