@@ -2,7 +2,7 @@
 {% block body %}
     <div class="container-fluid main-banner">
       <div class="row">
-          <img src="static/images/main-bike-5-27-18.jpg" class="img-responsive center-block center-image" id="main-img">
+          <img src="static/images/IMG_1583.jpg" class="img-responsive center-block center-image" id="main-img">
       </div>
     </div>
     <div class="container written-content">
@@ -172,11 +172,19 @@
         </div>
         <br>
         <div class="row">
-          <h4>Check out the Ernie's Ride custom cycling kit <a data-fancybox="gallery" href="{{ url_for('static', filename='images/kit-1.jpg') }}">here</a>!
-            <a data-fancybox="gallery" href="{{ url_for('static', filename='images/kit-2.jpg') }}"></a>
-            <a data-fancybox="gallery" href="{{ url_for('static', filename='images/kit-3.jpg') }}"></a>
-            <a data-fancybox="gallery" href="{{ url_for('static', filename='images/kit-4.jpg') }}"></a>
+          <h4>Check out the Ernie's Ride custom cycling kit <a data-fancybox="gallery" href="{{ url_for('static', filename='images/kit_2019_01.png') }}">here</a>!
+            <a data-fancybox="gallery" href="{{ url_for('static', filename='images/kit_2019_02.png') }}"></a>
+            <a data-fancybox="gallery" href="{{ url_for('static', filename='images/kit_2019_03.png') }}"></a>
+            <a data-fancybox="gallery" href="{{ url_for('static', filename='images/kit_2019_04.png') }}"></a>
+            <a data-fancybox="gallery" href="{{ url_for('static', filename='images/kit_2019_05.png') }}"></a>
           </h4>
+        </div>
+        <div class="row">
+          <h1>Thanks To Our Cycling Kit Sponsor!</h1>
+          <br>
+          <div class="col-md-8 col-md-offset-2">
+            <img src="{{url_for('static', filename='images/girdwood_logo.jpg') }}" class="img-responsive"/>
+          </div>
         </div>
       </div>
   <script type="text/javascript">
