@@ -425,6 +425,7 @@ p {
 	}
 }
 
-#testContainer {
-	margin: 0 auto;
+.clear-col {
+	clear: both;
 }
+
