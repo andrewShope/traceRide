@@ -7,7 +7,7 @@ import bcrypt
 
 
 app = Flask(__name__)
-app.config.from_object('erniesRide_settings.BaseConfig')
+app.config.from_object('default_settings.BaseConfig')
 app.config.update(dict(
 	DATABASE=os.path.join(app.root_path, 'pledges.db'),
 	))
