@@ -75,12 +75,6 @@ def pledge():
 	else:
 		return jsonify(result='failure')
 
-@app.route('/view')
-def show_entries():
-	db = get_db()
-	cur = db.execute('select email, pledge from entries order by id desc')
-	entries = cur.fetchall()
-	return render_template('show_entries.html', entries=entries)
 
 @app.route('/admin/', methods=["POST", "GET"])
 def login():
