@@ -320,7 +320,7 @@ def addNewRideArticle(articleID):
 def imageFolder():
 	if 'username' in session:
 		if request.method == "GET":
-			fileList = os.listdir('erniesRide/static/thumbnails')
+			fileList = os.listdir(os.getcwd() + '/erniesRide/static/thumbnails')
 			return render_template('image_folder.html', fileList=fileList)
 		if request.method == "POST":
 			if 'file' not in request.files:
