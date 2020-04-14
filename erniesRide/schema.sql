@@ -15,3 +15,27 @@ create table riders (
 	id integer primary key autoincrement,
 	riderName text not null
 );
+
+create table centers (
+	id integer primary key autoincrement,
+	title text not null,
+	contents text not null
+);
+
+create table past_rides (
+	id integer primary key autoincrement,
+	title text not null,
+	contents text not null
+);
+
+create table articles (
+	id integer primary key autoincrement,
+	title text not null,
+	contents text not null
+);
+
+create table site_info (
+	id integer primary key autoincrement,
+	title text not null,
+	contents text not null
+);

@@ -1,3 +1,10 @@
+import os
+from PIL import Image
+
+thumbPath = "/erniesRide/static/thumbnails/"
+imagePath = "/erniesRide/static/images/"
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
 def getRiders(db):
 	"""Returns a list containing the name of each
 	rider in the db
@@ -87,4 +94,43 @@ def validateRider(riderName, db):
 		return True
 	else:
 		return False
+
+def rowToSiteInfoDict(rows):
+	'''
+	Takes a sqlite row object and creates a 
+	dictionary where the key is the first index
+	of each row and the value is the respective
+	second index
+	'''
+	d = {}
+	for row in rows:
+		d[row["title"]] = row["contents"]
+	return d
+
+def getSiteInfo(db):
+	'''
+	Returns the site_info table as a dictionary
+	'''
+	cur = db.execute('select * from site_info')
+	siteInfo = cur.fetchall()
+	siteInfo = rowToSiteInfoDict(siteInfo)
+	cur = db.execute('select * from past_rides order by title desc')
+	siteInfo["pastRides"] = cur.fetchall()
+	cur = db.execute('select title from articles')
+	siteInfo["articles"] = cur.fetchall()
+	
+	return siteInfo
+
+def allowedFile(filename):
+	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+def saveThumbnail(filename):
+	im = Image.open(os.getcwd() + imagePath + filename)
+	largestSide = max(im.width, im.height)
+	factor = largestSide/600
+	im_resized = im.resize((int(im.width//factor), int(im.height//factor)))
+	im_resized.save(os.getcwd() + thumbPath+filename)
+
+	return True
+
 

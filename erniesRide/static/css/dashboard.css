@@ -103,3 +103,27 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+.border {
+  border: 1px solid red;
+}
+
+.image-directory-container {
+  height: 300px;
+}
+
+.height-full {
+  height: 100%;
+}
+
+.height-80 {
+  height: 80%;
+}
+
+.height-10 {
+  height: 10%;
+}
+
+.image-container img {
+  max-height: 100%;
+}

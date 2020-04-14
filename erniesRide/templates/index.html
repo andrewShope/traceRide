@@ -2,37 +2,13 @@
 {% block body %}
     <div class="container-fluid main-banner">
       <div class="row">
-          <img src="static/images/IMG_1583.jpg" class="img-responsive center-block center-image" id="main-img">
+          <img src="static/images/{{ siteInfo['banner_image'] }}" class="img-responsive center-block center-image" id="main-img">
       </div>
     </div>
     <div class="container written-content">
       <div class="row">
         <div class="col-md-6">
-          <h1>Ernie's Ride 2019</h1>
-          <p>
-          Ernie’s Ride is a self-supported (no assistance vehicle) ride on the first weekend in August (Friday – Sunday). This year’s ride will take place August 2-4, 2019. This challenging ride is an event created to raise funds, prayers, and awareness for two pro-life women’s centers here in Warren & Butler Counties. The Community Pregnancy Center is located in Middletown, OH, while Elizabeth's New Life Center is located in my hometown, Lebanon, OH. 
-          <br>
-          <img src="static/images/O2E_LogoWithText-01.png" class="img-responsive center-block" id="O2E-logo">
-          <br>
-          The premise of the ride is very straight-forward: Riders complete as much of the 320-mile distance between the Ohio River, in Cincinnati, and Lake Erie, in Cleveland, during the 3-day event. Maybe 2019 is your year to ride!  You can see information on past rides on the tab above.  And, you can read more about the history, the Centers, the Ernie’s Ride Cycling Kit, and more by using the navigation tabs at the top of this page.  If you think you’d like to Ride this August, email us at erniesride@gmail.com.
-          <br>
-          <br>
-          Or, if you’d like, you can sponsor a rider a set amount per mile. When Ernie’s Ride 2019 is over, you make your donation directly to the Center you have chosen based on the total number of miles (320-mile max) your sponsored rider has covered. 
-          <br>
-          <br>
-          To sponsor, just visit the “Sponsor” section, and pick the rider you want to sponsor and the Center to which you wish to donate. Then tell us your name, email address, City, and State, and the amount per mile you are sponsoring. The website will even calculate your maximum commitment for you! <span class="bold">After the ride</span>, we email you with the final total of your sponsorship and a link, address, and instructions to fulfill your pledge. We don’t handle the money. Your donation goes directly to the Center!  <span class="bold">Just click the "Sponsor" tab above.</span>
-          <br>
-          <br>
-          You might say: “Why don’t I just give a set amount?” Well, you could. And, you can. Anytime. But that’s not what we are doing here. We are making a focused push to challenge ourselves to give big. The ride is part of your motivation to do so. Your per-mile pledge is THE motivation for riders to keep pedaling and to share the benefits of their joy of riding. As the miles roll by, and fatigue creeps in, we will continue to pedal knowing that each mile means life to women, babies, and families in our area. 
-          <br>
-          <br>
-          Please sponsor generously!
-          <br>
-          <br>
-          Godspeed,
-          <br>
-          Doug
-          </p>
+          {{ mainArticleContents|safe }}
         </div>
         <div class="col-md-6" id="state-map">
           <h1 id="sponsor">Sponsor</h1>
@@ -42,11 +18,18 @@
             <br>
             <br>
             <p>
-            After the Ride is completed, and the miles have been tallied, you will be contacted with the total amount of your pledge and a link for payment.  Contact will be made via the email address that you leave below.  All gifts are tax-deductible &amp; confidential.
+            {% if siteInfo["isSponsorActive"] == "TRUE" %}
+              {{ siteInfo["activeSponsorMessage"]|safe }}
+            {% else %}
+              {{ siteInfo["inactiveSponsorMessage"]|safe }}
+            {% endif %}
             </p>
             <br>
             <div id="donationSection">
               <form action="javascript: myFunction(); return {};">
+                {% if siteInfo["isSponsorActive"] == "FALSE" %}
+                <fieldset disabled="disabled">
+                {% endif %}
             <!-- <form> -->
             <div class="container same-line-container">
               <div class="form-group test">
@@ -105,6 +88,9 @@
                 <span class="error-message" id="pledgeAmount-error">Please enter a valid amount.</span>
               </div>
               <button type="submit" id="submitButton" class="btn btn-default pull-left">Submit</button>
+            {% if siteInfo["isSponsorActive"] == "FALSE" %}
+              </fieldset>
+            {% endif %}  
             </form>
             </div>
           <div class="cell-background">

@@ -1,0 +1,32 @@
+{% extends 'base_admin.html' %}
+
+{% block content %}
+<form method="post" action="/admin/edit-site-information">
+  <div class="form-group">
+      <label for="websiteTitle">Website Title</label>
+      <input type="text" class="form-control" name="websiteTitle" value="{{ siteInfo['websiteTitle'] }}">
+  </div>
+  <div class="form-group">
+  	<label for="sponsorStatus">Sponsor Status</label>
+  	<br>
+  	<input type="radio" id="TRUE" value="TRUE" name="sponsorStatus" {% if siteInfo["isSponsorActive"] == "TRUE" %}checked{% endif %}>
+  	<label for="TRUE">Active</label>
+  	<br>
+  	<input type="radio" id="FALSE" value="FALSE" name="sponsorStatus" {% if siteInfo["isSponsorActive"] == "FALSE" %}checked{% endif %}>
+  	<label for="FALSE">Inactive</label>
+  </div>
+  <div class="form-group">
+      <label for="activeSponsorMessage">Active Sponsor Message</label>
+      <textarea class="form-control" name="activeSponsorMessage" value="{{ siteInfo['activeSponsorMessage'] }}">{{ siteInfo['activeSponsorMessage'] }}</textarea>
+  </div>
+  <div class="form-group">
+      <label for="inactiveSponsorMessage">Inactive Sponsor Message</label>
+      <textarea class="form-control" name="inactiveSponsorMessage" value="{{ siteInfo['inactiveSponsorMessage'] }}">{{ siteInfo['inactiveSponsorMessage'] }}</textarea>
+  </div>
+  <div class="form-group">
+      <label for="bannerImage">Front Page Banner Image</label>
+      <input type="text" class="form-control" name="bannerImage" value="{{ siteInfo['banner_image'] }}">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}
