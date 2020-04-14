@@ -6,7 +6,7 @@ from werkzeug.utils import secure_filename
 import utils
 import bcrypt
 
-UPLOAD_FOLDER = "erniesRide/static/images"
+UPLOAD_FOLDER = "/home/andrew/erniesRide/erniesRide/static/images"
 app = Flask(__name__)
 app.config.from_object('default_settings.BaseConfig')
 app.config.update(dict(
@@ -320,7 +320,7 @@ def addNewRideArticle(articleID):
 def imageFolder():
 	if 'username' in session:
 		if request.method == "GET":
-			fileList = os.listdir(os.getcwd() + '/erniesRide/static/thumbnails')
+			fileList = os.listdir('/home/andrew/erniesRide/erniesRide/static/thumbnails')
 			return render_template('image_folder.html', fileList=fileList)
 		if request.method == "POST":
 			if 'file' not in request.files:
