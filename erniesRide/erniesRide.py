@@ -6,17 +6,21 @@ from werkzeug.utils import secure_filename
 import utils
 import bcrypt
 
-UPLOAD_FOLDER = "/home/andrew/erniesRide/erniesRide/static/images"
+# UPLOAD_FOLDER = "/home/andrew/erniesRide/erniesRide/static/images"
+
 app = Flask(__name__)
 app.config.from_object('default_settings.BaseConfig')
 app.config.update(dict(
 	DATABASE=os.path.join(app.root_path, 'pledges.db'),
 	))
+UPLOAD_FOLDER = os.path.join(app.root_path, "static/images")
+THUMBNAIL_FOLDER = os.path.join(app.root_path, "static/thumbnails")
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def render_template(source, **context):
 	siteInfo = utils.getSiteInfo(get_db())
 	context["siteInfo"] = siteInfo
+	print(app.root_path)
 
 	return flask_render_template(source, **context)
 
@@ -320,7 +324,7 @@ def addNewRideArticle(articleID):
 def imageFolder():
 	if 'username' in session:
 		if request.method == "GET":
-			fileList = os.listdir('/home/andrew/erniesRide/erniesRide/static/thumbnails')
+			fileList = os.listdir(THUMBNAIL_FOLDER)
 			return render_template('image_folder.html', fileList=fileList)
 		if request.method == "POST":
 			if 'file' not in request.files:
@@ -330,8 +334,8 @@ def imageFolder():
 				return(redirect(url_for(imageFolder)))
 			if file and utils.allowedFile(file.filename):
 				filename = secure_filename(file.filename)
-				file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-				utils.saveThumbnail(filename)
+				file.save(os.path.join(UPLOAD_FOLDER, filename))
+				utils.saveThumbnail(filename, UPLOAD_FOLDER, THUMBNAIL_FOLDER)
 				return redirect(url_for('imageFolder'))
 	else:
 		return redirect(url_for('login'))

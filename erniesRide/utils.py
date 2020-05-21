@@ -124,12 +124,12 @@ def getSiteInfo(db):
 def allowedFile(filename):
 	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def saveThumbnail(filename):
-	im = Image.open(os.getcwd() + imagePath + filename)
+def saveThumbnail(filename, imagePath, thumbnailFolderPath):
+	im = Image.open(os.path.join(imagePath, filename))
 	largestSide = max(im.width, im.height)
 	factor = largestSide/600
 	im_resized = im.resize((int(im.width//factor), int(im.height//factor)))
-	im_resized.save(os.getcwd() + thumbPath+filename)
+	im_resized.save(os.path.join(thumbnailFolderPath, filename))
 
 	return True
 
