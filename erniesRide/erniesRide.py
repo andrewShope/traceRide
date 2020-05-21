@@ -325,12 +325,13 @@ def imageFolder():
 	if 'username' in session:
 		if request.method == "GET":
 			fileList = os.listdir(THUMBNAIL_FOLDER)
+			fileList.sort()
 			return render_template('image_folder.html', fileList=fileList)
 		if request.method == "POST":
 			if 'file' not in request.files:
 				return redirect(url_for(imageFolder))
 			file = request.files['file']
-			if file.filename == '':
+			if file.filename == '' or file is None:
 				return(redirect(url_for(imageFolder)))
 			if file and utils.allowedFile(file.filename):
 				filename = secure_filename(file.filename)
