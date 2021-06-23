@@ -249,6 +249,10 @@ def aboutENLC():
 def aboutCPC():
 	return render_template('cpc.html')
 
+@app.route('/about-flc-auglaize-county')
+def aboutFLC():
+	return render_template('flc.html')
+
 @app.route('/admin/update-site-title', methods=["POST"])
 def changeSiteTitle():
 	if request.method == "POST":
