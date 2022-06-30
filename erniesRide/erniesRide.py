@@ -1,3 +1,4 @@
+from calendar import c
 import os
 import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template as flask_render_template, \
@@ -9,7 +10,11 @@ import bcrypt
 # UPLOAD_FOLDER = "/home/andrew/erniesRide/erniesRide/static/images"
 
 app = Flask(__name__)
-app.config.from_object('default_settings.BaseConfig')
+if os.environ.get("FLASK_ENV") == "development":
+	app.config.from_object('erniesRide_settings.BaseConfig')
+else:
+	app.config.from_object('default_settings.BaseConfig')
+
 app.config.update(dict(
 	DATABASE=os.path.join(app.root_path, 'pledges.db'),
 	))
@@ -68,9 +73,11 @@ def index():
 	cur = db.execute('select contents from articles where title="main_article"')
 	results = cur.fetchall()
 	mainArticleContents = results[0]["contents"]
+	cur = db.execute('select * from rider_bios')
+	riderBios = cur.fetchall()
 	return render_template('index.html', pledgeSum=pledgeSum, riders=riders, 
 							centerPledges=centerPledges, riderPledges=riderPledges, 
-							siteInfo=siteInfo, mainArticleContents=mainArticleContents)
+							siteInfo=siteInfo, mainArticleContents=mainArticleContents, riderBios=riderBios)
 
 @app.route('/pledge', methods=["POST"])
 def pledge():
@@ -333,14 +340,85 @@ def imageFolder():
 			return render_template('image_folder.html', fileList=fileList)
 		if request.method == "POST":
 			if 'file' not in request.files:
-				return redirect(url_for(imageFolder))
+				return redirect(url_for('imageFolder'))
 			file = request.files['file']
 			if file.filename == '' or file is None:
-				return(redirect(url_for(imageFolder)))
+				return(redirect(url_for('imageFolder')))
 			if file and utils.allowedFile(file.filename):
 				filename = secure_filename(file.filename)
 				file.save(os.path.join(UPLOAD_FOLDER, filename))
 				utils.saveThumbnail(filename, UPLOAD_FOLDER, THUMBNAIL_FOLDER)
 				return redirect(url_for('imageFolder'))
+	else:
+		return redirect(url_for('login'))
+
+@app.route('/admin/manage-rider-bios', methods=["GET"])
+def manageRiderBios():
+	if 'username' in session:
+		db = get_db()
+		cur = db.execute('select * from rider_bios')
+		riderBios = cur.fetchall()
+		return render_template('edit_rider_bios.html', riderBios=riderBios)
+	else:
+		return redirect(url_for('login'))
+
+@app.route('/admin/putNewRiderBio', methods=["POST"])
+def putNewRiderBio():
+	if 'username' in session:
+		# Verify the uploaded information is correct
+		if 'riderPictureFile' not in request.files:
+			return redirect(url_for('manageRiderBios'))
+		riderName = request.form['riderNameInput']
+		riderBio = request.form['riderBioInput']
+		file = request.files['riderPictureFile']
+		fileName = secure_filename(file.filename)
+		if riderName == "" or riderBio == "" or fileName == "":
+			return redirect(url_for('manageRiderBios'))
+			print("We had a problem")
+
+		# Save all necessary info in the database
+		db = get_db()
+		cur = db.execute('insert into rider_bios (name, bio, picture) values (?, ?, ?)', (riderName, riderBio, fileName))
+		db.commit()
+
+		# Upload the file to the server
+		if file and utils.allowedFile(fileName):
+				file.save(os.path.join(UPLOAD_FOLDER, fileName))
+				utils.saveThumbnail(fileName, UPLOAD_FOLDER, THUMBNAIL_FOLDER)
+				return redirect(url_for('manageRiderBios'))
+	else:
+		return redirect(url_for('login'))
+
+@app.route('/admin/updateRiderBio', methods=["POST"])
+def updateRiderBio():
+	if 'username' in session:
+		# If the delete checkbox is checked, delete that rider.
+		if 'deleteRider' in request.form and 'riderID' in request.form:
+			db = get_db()
+			cur = db.execute('delete from rider_bios where id = (?)',(request.form['riderID']))
+			db.commit()
+			return redirect(url_for('manageRiderBios'))
+
+		# Since it's not a deletion, it must be an edit
+		riderName = request.form['riderName']
+		riderBio = request.form['riderBio']
+		riderID = request.form['riderID']
+		fileName = request.form['originalFilename']
+		# Check if a new filel was uploaded
+		if 'riderPictureUpload' in request.files:
+			if request.files['riderPictureUpload']:
+				print("In Here.")
+				print(request.files)
+				file = request.files['riderPictureUpload']
+				fileName = secure_filename(file.filename)
+				file.save(os.path.join(UPLOAD_FOLDER, fileName))
+				utils.saveThumbnail(fileName, UPLOAD_FOLDER, THUMBNAIL_FOLDER)
+
+		db = get_db()
+		cur = db.execute('update rider_bios SET name = (?), bio = (?), picture = (?) WHERE id = (?)', (riderName, riderBio, fileName, riderID))
+		db.commit()
+
+		return redirect(url_for('manageRiderBios'))
+
 	else:
 		return redirect(url_for('login'))

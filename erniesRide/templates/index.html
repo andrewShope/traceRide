@@ -105,74 +105,22 @@
       <div class="container">
         <div class="row">
           <div class="col">
-            <h1>Meet the 2021 Ernie's Riders</h1>
+            <h1>Meet the 2022 Ernie's Riders</h1>
           </div>
         </div>
         <br>
         <div class="row">
-          <div class="col-md-3">
-            <img src="static/images/Doug_Shope_2020_2.jpg" class="img-responsive" />
+          {% for rider in riderBios %}
+          <div class="col-md-3 {% if loop.index0 % 4 == 0 %}clear-col{%endif%}">
+            <img src="static/images/{{rider.picture}}" class="img-responsive" />
             <div class="container-fluid">
-              <h3>Doug Shope</h3>
+              <h3>{{rider.name}}</h3>
               <p class="text-center">
-                Doug Shope is 61 years old and lives in Lebanon, Ohio with his wife Judy.  They have two grown sons and a daughter(-in-law): Andrew, Tim, &amp; Courtney.  Doug &amp; Judy attend Faith Bible Church in Mason.
+                {{rider.bio}}
               </p>
             </div>
           </div>
-          <div class="col-md-3">
-            <img src="static/images/Dave_Huff_2021.jpg" class="img-responsive" />
-            <div class="container-fluid">
-              <h3>Dave Huff</h3>
-              <p class="text-center">
-                Dave Huff is 56 years old and lives in Mason, Ohio. He and his wife Shari have two daughters, Lauren and Emily. They attend Faith Bible Church in Mason. Dave was previously on staff with Athletes in Action and now has his own computer consulting business.
-              </p>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <img src="static/images/Kevin_Brown_2021.jpg" class="img-responsive" />
-            <div class="container-fluid">
-              <h3>Kevin Brown</h3>
-              <p class="text-center">
-                Kevin Brown is 58 years old and lives in St. Marys with his wife Sherri of 38 years. They have three children and three grandchildren and have been empty nesters for several years. They are proudly pro-life.
-              </p>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <img src="static/images/Brian_Messer_2021.jpg" class="img-responsive" />
-            <div class="container-fluid">
-              <h3>Brian Messer</h3>
-              <p class="text-center">
-                Brian Messer is 34 years old and lives in Lebanon, Ohio with his wife Allison. They have 4 children: Audrey, Eloise, Macy and Zoey. Brian and Allison attend Urbancrest Baptist Church in Lebanon.
-              </p>
-            </div>
-          </div>
-          <div class="col-md-3  clear-col">
-            <img src="static/images/Luke_Williams_2021.jpg" class="img-responsive" />
-            <div class="container-fluid">
-              <h3>Luke Williams</h3>
-              <p class="text-center">
-              	Luke Williams is 31 years old and has been married for three years to his wife Madyson. Luke is currently employed by Sycamore Glen. They attend The Community Church.
-              </p>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <img src="static/images/Chad_Settlage_2021.jpg" class="img-responsive" />
-            <div class="container-fluid">
-              <h3>Chad Settlage</h3>
-              <p class="text-center">
-              	Chad is 49 years old. He &amp; his wife, Amy, attend The Community Church. He &amp; Amy are part owners of their own business in Lebanon. They have a son, Tevin, and a daughter, Madyson. Madyson is married to Luke Williams, who is also riding this year.
-              </p>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <img src="static/images/scott_wright.png" class="img-responsive" />
-            <div class="container-fluid">
-              <h3>Scott Wright</h3>
-              <p class="text-center">
-              	Scott Wright is 53 years old and lives in Loveland, Ohio with his wife, Jenny. He has two adult children, Katie and Lauren, and attends Faith Bible Church where he serves on the Audio Visual and Technology Teams.
-              </p>
-            </div>
-          </div>
+          {% endfor %}
         </div>
         <br>
         <div class="row">
