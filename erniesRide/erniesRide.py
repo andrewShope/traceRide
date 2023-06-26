@@ -395,7 +395,7 @@ def updateRiderBio():
 		# If the delete checkbox is checked, delete that rider.
 		if 'deleteRider' in request.form and 'riderID' in request.form:
 			db = get_db()
-			cur = db.execute('delete from rider_bios where id = (?)',(request.form['riderID']))
+			cur = db.execute('delete from rider_bios where id = (?)',(request.form['riderID'],))
 			db.commit()
 			return redirect(url_for('manageRiderBios'))
 
