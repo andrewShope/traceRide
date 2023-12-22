@@ -1,0 +1,24 @@
+{% extends 'base_admin.html' %}
+{% block content %}
+<div class="container">
+    <h1>Auto Email Message</h1>
+    <h3>Instructions</h3>
+    <p>Below, enter the message that you would like to be sent automatically to all new pledges. You can use the following variables in your message. These will be substituted for the pledge's specific information before being sent. Be sure to type the variables as they are shown with no spaces between the curly brackets.</p>
+    <ul>
+        <li> Pledge's First Name: <strong>{firstName}</strong></li>
+        <li> Pledge's Last Name: <strong>{lastName}</strong></li>
+        <li> Donation Center Being Pledged To: <strong>{donationCenter}</strong></li>
+        <li> Name of Rider Being Pledged To (First and Last): <strong>{riderName}</strong></li>
+        <li> Amount of the Pledge: <strong>{pledgeAmount}</strong></li>
+    </ul>
+    <div class="container">
+        <form action="/admin/auto-email" method="post">
+            <div class="form-group">
+                <label for="emailMessage">Email Message</label>
+                <textarea class="form-control" name="emailMessage" rows="15">{{emailMessage[0].contents}}</textarea>
+            </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

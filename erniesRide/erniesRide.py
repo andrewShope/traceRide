@@ -99,7 +99,7 @@ def pledge():
 		db.execute('insert into email_queue (email_address, first_name, last_name, donation_center, pledged_rider, pledged_amount, email_sent) values (?, ?, ?, ?, ? ,?, ?)',
 			[email, firstName, lastName, donationCenter, riderName, pledge, 0])
 		db.commit()
-		
+
 		pledgeSum = utils.sumTotal(get_db())
 		return jsonify(result='success', total=pledgeSum, pledgeAmount=pledge)
 	else:
@@ -365,6 +365,24 @@ def manageRiderBios():
 		cur = db.execute('select * from rider_bios')
 		riderBios = cur.fetchall()
 		return render_template('edit_rider_bios.html', riderBios=riderBios)
+	else:
+		return redirect(url_for('login'))
+
+@app.route('/admin/auto-email', methods=["GET", "POST"])
+def autoEmailView():
+	if 'username' in session:
+		if request.method == "GET":
+			db = get_db()
+			cur = db.execute('select * from site_info where title = ?;', ("autoEmailMessage",))
+			emailMessage = cur.fetchall()
+			return render_template('edit_auto_email.html', emailMessage=emailMessage)
+		elif request.method == "POST":
+			db = get_db()
+			emailContents = request.form["emailMessage"]
+			cur = db.execute("update site_info set contents = ? where title = ?;", 
+							 (emailContents, "autoEmailMessage"))
+			db.commit()
+			return redirect(url_for("autoEmailView"))
 	else:
 		return redirect(url_for('login'))
 
