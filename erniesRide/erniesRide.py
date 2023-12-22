@@ -94,6 +94,12 @@ def pledge():
 		db.execute('insert into entries (email, pledge, firstName, lastName, city, state, riderName, donationCenter) values (?, ?, ?, ?, ? ,?, ?, ?)',
 			[email, pledge, firstName, lastName, city, state, riderName, donationCenter])
 		db.commit()
+
+		db = get_db()
+		db.execute('insert into email_queue (email_address, first_name, last_name, donation_center, pledged_rider, pledged_amount, email_sent) values (?, ?, ?, ?, ? ,?, ?)',
+			[email, firstName, lastName, donationCenter, riderName, pledge, 0])
+		db.commit()
+		
 		pledgeSum = utils.sumTotal(get_db())
 		return jsonify(result='success', total=pledgeSum, pledgeAmount=pledge)
 	else:
