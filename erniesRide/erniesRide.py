@@ -379,8 +379,7 @@ def autoEmailView():
 		elif request.method == "POST":
 			db = get_db()
 			emailContents = request.form["emailMessage"]
-			cur = db.execute("update site_info set contents = ? where title = ?;", 
-							 (emailContents, "autoEmailMessage"))
+			cur = db.execute("update site_info set contents = ? where title = ?;", (emailContents, "autoEmailMessage"))
 			db.commit()
 			return redirect(url_for("autoEmailView"))
 	else:
