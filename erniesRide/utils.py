@@ -49,7 +49,7 @@ def riderSums(db):
 
 def centerSums(db):
 	centerDict = {}
-	centers = ["Elizabeth's New Life Center", "Community Pregnancy Center", "Family Life Center of Auglaize County"]
+	centers = ["Elizabeth's New Life Center", "Community Pregnancy Center", "Family Life Center of Auglaize County", "Hope Rising Women's Center"]
 	for center in centers:
 		cur = db.execute("select pledge from entries where donationCenter=(?)", [center])
 		pledges = cur.fetchall()
@@ -81,7 +81,7 @@ def validateFields(city, state, firstName, lastName, emailAddress, pledgeAmount,
 	return flag
 
 def validateCenter(centerName):
-	centers = ["Elizabeth's New Life Center", "Community Pregnancy Center", "Family Life Center of Auglaize County"]
+	centers = ["Elizabeth's New Life Center", "Community Pregnancy Center", "Family Life Center of Auglaize County", "Hope Rising Women's Center"]
 	if centerName in centers:
 		return True
 	else:
