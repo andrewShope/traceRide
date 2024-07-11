@@ -266,6 +266,10 @@ def aboutCPC():
 def aboutFLC():
 	return render_template('flc.html')
 
+@app.route('/about-hope-rising')
+def aboutHopeRising():
+	return render_template('hope_rising.html')
+
 @app.route('/admin/update-site-title', methods=["POST"])
 def changeSiteTitle():
 	if request.method == "POST":
