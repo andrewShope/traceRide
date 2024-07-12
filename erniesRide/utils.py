@@ -81,7 +81,7 @@ def validateFields(city, state, firstName, lastName, emailAddress, pledgeAmount,
 	return flag
 
 def validateCenter(centerName):
-	centers = ["Elizabeth's New Life Center", "Community Pregnancy Center", "Family Life Center of Auglaize County", "Hope Rising Women's Center"]
+	centers = ["Elizabeth's New Life Center", "Community Pregnancy Center", "Family Life Center of Auglaize County", "Hope Rising Pregnancy Center"]
 	if centerName in centers:
 		return True
 	else:
