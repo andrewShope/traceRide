@@ -1,6 +1,13 @@
 {% extends 'base_admin.html' %}
 
 {% block content %}
+<h1>Edit Main Article</h1>
+<p>Use the following HTML tags in your article contents:
+<ul>
+	<li>Wrap the article title in an <strong>&lt;h1&gt;</strong>Tag<strong>&lt;/h1&gt;</strong></li>
+	<li>Wrap each of your paragrphs in <strong>&lt;p&gt;</strong>Tags<strong>&lt;/p&gt;</strong></li>
+	<li>All text must be wrapped in one of those two tags.</li>
+</ul> 
 <form action="/admin/edit-article/{{ articleContents['title'] }}" method="post">
 	<div class="form-group">
 		<label for="articleTitle">Article Title</label>
