@@ -47,16 +47,6 @@ def riderSums(db):
 
 	return riderDict
 
-def centerSums(db):
-	centerDict = {}
-	centers = ["Elizabeth's New Life Center", "Community Pregnancy Center", "Family Life Center of Auglaize County", "Hope Rising Pregnancy Center"]
-	for center in centers:
-		cur = db.execute("select pledge from entries where donationCenter=(?)", [center])
-		pledges = cur.fetchall()
-		centerDict[center] = sumPledges(pledges)
-
-	return centerDict
-
 def validateEmail(emailAddress):
 	return True
 
