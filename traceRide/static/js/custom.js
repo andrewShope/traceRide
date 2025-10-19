@@ -37,7 +37,7 @@ function showErrorPrompts(errorData) {
 	}
 }
 
-function validateFields(city, state, firstName, lastName, emailAddress, pledgeAmount, riderName, donationCenter) {
+function validateFields(city, state, firstName, lastName, emailAddress, pledgeAmount) {
 	var flag = true;
 	var errorFields = [];
 
@@ -65,14 +65,6 @@ function validateFields(city, state, firstName, lastName, emailAddress, pledgeAm
 		flag = false;
 		errorFields.push("pledgeAmount");
 	}
-	if (riderName === "") {
-		flag = false;
-		errorFields.push("riderName");
-	}
-	if (donationCenter === "") {
-		flag = false;
-		errorFields.push("donationCenter");
-	}
 
 	return [flag, errorFields];
 }
@@ -86,10 +78,9 @@ $(document).ready(function(){
 		var emailAddress = $("#inputEmail").val();
 		var pledgeAmount = $("#pledgeAmount").val();
 		var pledgeAmount = stripDollarSign(pledgeAmount);
-		var riderName = $("#sponsoredRider option:selected").text();
-		var donationCenter = $("#donationCenter option:selected").text();
+		var riderName = $("#sponsoredRider").val();
 
-		var checkData= validateFields(city, state, firstName, lastName, emailAddress, pledgeAmount, riderName, donationCenter);
+		var checkData= validateFields(city, state, firstName, lastName, emailAddress, pledgeAmount);
 		var flag = checkData[0];
 		var errorData = checkData[1];
 
@@ -101,8 +92,7 @@ $(document).ready(function(){
 				state: state,
 				pledgeAmount: pledgeAmount,
 				emailAddress: emailAddress,
-				riderName: riderName,
-				donationCenter: donationCenter
+				riderName: riderName
 			}, function(data) {
 				if (data.result === 'success') {
 					$("#donationSection").fadeOut(2000, function() {
@@ -142,14 +132,6 @@ $(document).ready(function(){
 			$("#riderSum").text("0.00");
 		} else {
 		$("#riderSum").text(window.riderPledges[$("#sponsoredRider option:selected").text()].toFixed(2));
-		}	
-	});
-
-	$("#donationCenter").change(function () {
-		if (window.centerPledges[$("#donationCenter option:selected").text()] == undefined) {
-			$("#centerSum").text("0.00");
-		} else {
-		$("#centerSum").text(window.centerPledges[$("#donationCenter option:selected").text()].toFixed(2));
 		}	
 	});
 

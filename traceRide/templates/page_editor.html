@@ -17,15 +17,11 @@
   </div>
   <div class="form-group">
       <label for="activeSponsorMessage">Active Sponsor Message</label>
-      <textarea class="form-control" name="activeSponsorMessage" value="{{ siteInfo['activeSponsorMessage'] }}">{{ siteInfo['activeSponsorMessage'] }}</textarea>
+      <textarea class="form-control" rows="5" name="activeSponsorMessage" value="{{ siteInfo['activeSponsorMessage'] }}">{{ siteInfo['activeSponsorMessage'] }}</textarea>
   </div>
   <div class="form-group">
       <label for="inactiveSponsorMessage">Inactive Sponsor Message</label>
-      <textarea class="form-control" name="inactiveSponsorMessage" value="{{ siteInfo['inactiveSponsorMessage'] }}">{{ siteInfo['inactiveSponsorMessage'] }}</textarea>
-  </div>
-  <div class="form-group">
-      <label for="bannerImage">Front Page Banner Image</label>
-      <input type="text" class="form-control" name="bannerImage" value="{{ siteInfo['banner_image'] }}">
+      <textarea class="form-control" rows="5" name="inactiveSponsorMessage" value="{{ siteInfo['inactiveSponsorMessage'] }}">{{ siteInfo['inactiveSponsorMessage'] }}</textarea>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

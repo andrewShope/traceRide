@@ -42,25 +42,6 @@
               </div>
             </div>
 
-            <div class="form-group">
-              <label for="sponsoredRider">Rider you wish to sponsor:</label>
-              <select class="form-control" id="sponsoredRider">
-                <option value="none"></option>
-                {% for rider in riders %}
-                  <option>{{rider.riderName}}</option>
-                {% endfor %}
-              </select>
-              <span class="error-message" id="riderName-error">Please select a rider to sponsor.</span>
-            </div>
-            <div class="form-group">
-              <label for="donationCenter">Center to which you wish to donate:</label>
-              <select class="form-control" id="donationCenter">
-                <option value="none"></option>
-                <option>Community Pregnancy Center</option>
-                <option>Elizabeth's New Life Center</option>
-              </select>
-              <span class="error-message" id="donationCenter-error">Please choose a donation center.</span>
-            </div>
               <div class="form-group">
                 <label for="pledgeAmount">Pledge Amount (per mile)</label>
                 <div class="container-fluid" id="pledgeDiv">

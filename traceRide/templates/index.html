@@ -2,7 +2,7 @@
 {% block body %}
     <div class="container-fluid main-banner">
       <div class="row">
-          <img src="static/images/{{ siteInfo['banner_image'] }}" class="img-responsive center-block center-image" id="main-img">
+          <img src="static/images/cover_image_resized.png" class="img-responsive center-block center-image" id="main-img">
       </div>
     </div>
     <div class="container written-content">
@@ -13,7 +13,7 @@
         <div class="col-md-6" id="state-map">
           <h1 id="sponsor">Sponsor</h1>
             <div class="container-fluid">
-              <img src="static/images/state-map.jpg" class="img-responsive center-block" />
+              <img src="static/images/tt_logo.png" class="img-responsive center-block" id="tt-logo" />
             </div>
             <br>
             <br>
@@ -27,9 +27,6 @@
             <br>
             <div id="donationSection">
               <form action="javascript: myFunction(); return {};">
-                {% if siteInfo["isSponsorActive"] == "FALSE" %}
-                <fieldset disabled="disabled">
-                {% endif %}
             <!-- <form> -->
             <div class="container same-line-container">
               <div class="form-group test">
@@ -60,7 +57,6 @@
                 <span class="error-message" id="state-error">This field cannot be empty.</span>
               </div>
             </div>
-
             <div class="form-group">
               <label for="sponsoredRider">Rider you wish to sponsor:</label>
               <select class="form-control" id="sponsoredRider">
@@ -71,17 +67,6 @@
               </select>
               <span class="error-message" id="riderName-error">Please select a rider to sponsor.</span>
             </div>
-            <div class="form-group">
-              <label for="donationCenter">Center to which you wish to donate:</label>
-              <select class="form-control" id="donationCenter">
-                <option value="none"></option>
-                <option>Community Pregnancy Center</option>
-                <option>Elizabeth's New Life Center</option>
-                <option>Family Life Center of Auglaize County</option>
-                <option>Hope Rising Pregnancy Center</option>
-              </select>
-              <span class="error-message" id="donationCenter-error">Please choose a donation center.</span>
-            </div>
               <div class="form-group">
                 <label for="pledgeAmount">Pledge Amount (per mile)</label>
                 <div class="container-fluid" id="pledgeDiv">
@@ -90,72 +75,12 @@
                 <span class="error-message" id="pledgeAmount-error">Please enter a valid amount.</span>
               </div>
               <button type="submit" id="submitButton" class="btn btn-default pull-left">Submit</button>
-            {% if siteInfo["isSponsorActive"] == "FALSE" %}
-              </fieldset>
-            {% endif %}  
             </form>
             </div>
           <div class="cell-background">
             <br><br><div id="donationMessage"></div>
             <p class="bold-text">Total Pledged for this Rider: $<span id="riderSum">0.00</span>/mi</p>
-            <p class="bold-text">Total Pledged for this Center: $<span id="centerSum">0.00</span>/mi</p>
-            <p class="bold-text">Total Pledged for Ernie's Ride 2025: $<span id="pledgeSum">{{ pledgeSum }}</span>/mi</p>
-          </div>
-        </div>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <h1>Meet the 2025 Ernie's Riders</h1>
-          </div>
-        </div>
-        <br>
-        <div class="row">
-          {% for rider in riderBios %}
-          <div class="col-md-3 {% if loop.index0 % 4 == 0 %}clear-col{%endif%}">
-            <img src="static/images/{{rider.picture}}" class="img-responsive" />
-            <div class="container-fluid">
-              <h3>{{rider.name}}</h3>
-              <p class="text-center">
-                {{rider.bio}}
-              </p>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-        <br>
-        <div class="row">
-          <h4>Check out the Ernie's Ride custom cycling kit <a data-fancybox="gallery" href="{{ url_for('static', filename='images/2025_jersey_front.jpg') }}">here</a>!
-            <a data-fancybox="gallery" href="{{ url_for('static', filename='images/2025_jersey_back.jpg') }}"></a>
-            <a data-fancybox="gallery" href="{{ url_for('static', filename='images/2025_jersey_left.jpg') }}"></a>
-            <a data-fancybox="gallery" href="{{ url_for('static', filename='images/2025_jersey_right.jpg') }}"></a>
-            <a data-fancybox="gallery" href="{{ url_for('static', filename='images/2025_bib_front.jpg') }}"></a>
-            <a data-fancybox="gallery" href="{{ url_for('static', filename='images/2025_bib_back.jpg') }}"></a>
-            <a data-fancybox="gallery" href="{{ url_for('static', filename='images/2025_bib_right.jpg') }}"></a>
-            <a data-fancybox="gallery" href="{{ url_for('static', filename='images/2025_bib_left.jpg') }}"></a>
-          </h4>
-        </div>
-        <div class="row">
-          <h1>Thanks To Our Cycling Kit Sponsors!</h1>
-          <br>
-          <div class="col-md-8 col-md-offset-2">
-            <img src="{{url_for('static', filename='images/girdwood_logo.jpg') }}" class="img-responsive center-block" />
-            <br>
-            <br>
-            <br>
-            <img src="{{url_for('static', filename='images/chalk_logo.png') }}" class="img-responsive center-block" />
-            <br>
-            <br>
-            <br>
-            <img src="{{url_for('static', filename='images/Community__Contagious.jpeg') }}" class="img-responsive center-block" />
-            <br>
-            <br>
-            <br>
-            <img src="{{url_for('static', filename='images/TomAhlLogo.png') }}" class="img-responsive center-block" />
-            <br>
-            <br>
-            <br>
-            <img src="{{url_for('static', filename='images/ThriveFamilyWellnessLogo.png') }}" class="img-responsive center-block" />
+            <p class="bold-text">Total Pledged for Tennessee Trace Ride: $<span id="pledgeSum">{{ pledgeSum }}</span>/mi</p>
           </div>
         </div>
       </div>
@@ -163,11 +88,6 @@
     window.riderPledges = {
       {% for key, value in riderPledges.items() %}
         "{{ key|e }}": {{ value|e }},
-      {% endfor %}
-    }
-    window.centerPledges = {
-      {% for key, value in centerPledges.items() %}
-        "{{ key|safe }}": {{ value|e }},
       {% endfor %}
     }
   </script>

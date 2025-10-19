@@ -4,14 +4,12 @@ import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template as flask_render_template, \
 				jsonify, flash, render_template_string
 from werkzeug.utils import secure_filename
-import utils
+import TraceRideUtils as utils
 import bcrypt
-
-# UPLOAD_FOLDER = "/home/andrew/erniesRide/erniesRide/static/images"
 
 app = Flask(__name__)
 if os.environ.get("FLASK_ENV") == "development":
-	app.config.from_object('erniesRide_settings.BaseConfig')
+	app.config.from_object('traceRide_settings.BaseConfig')
 else:
 	app.config.from_object('default_settings.BaseConfig')
 
@@ -65,19 +63,19 @@ def close_db(error):
 def index():
 	pledgeSum = utils.sumTotal(get_db())
 	db = get_db()
-	cur = db.execute('select riderName from riders order by riderName asc')
-	riders = cur.fetchall()
-	centerPledges = utils.centerSums(get_db())
-	riderPledges = utils.riderSums(get_db())
-	siteInfo = utils.getSiteInfo(db)
-	cur = db.execute('select contents from articles where title="main_article"')
+	cur = db.execute('select contents from articles where title="main-article"')
 	results = cur.fetchall()
 	mainArticleContents = results[0]["contents"]
-	cur = db.execute('select * from rider_bios')
-	riderBios = cur.fetchall()
-	return render_template('index.html', pledgeSum=pledgeSum, riders=riders, 
-							centerPledges=centerPledges, riderPledges=riderPledges, 
-							siteInfo=siteInfo, mainArticleContents=mainArticleContents, riderBios=riderBios)
+	siteInfo = utils.getSiteInfo(db)
+	cur = db.execute('select riderName from riders order by id asc')
+	riders = cur.fetchall()
+	riderPledges = utils.riderSums(get_db())
+
+	return render_template('index.html', pledgeSum=pledgeSum, 
+						   mainArticleContents=mainArticleContents,
+						   siteInfo=siteInfo,
+						   riders=riders,
+						   riderPledges=riderPledges)
 
 @app.route('/pledge', methods=["POST"])
 def pledge():
@@ -88,23 +86,22 @@ def pledge():
 	city = request.form['city']
 	state = request.form['state']
 	riderName = request.form['riderName']
-	donationCenter = request.form['donationCenter']
-	if utils.validateFields(firstName, lastName, city, state, email, pledge, riderName, donationCenter, get_db()):
+	print(request.form)
+	if utils.validateFields(city, state, firstName, lastName, email, pledge, riderName, get_db()):
 		db = get_db()
-		db.execute('insert into entries (email, pledge, firstName, lastName, city, state, riderName, donationCenter) values (?, ?, ?, ?, ? ,?, ?, ?)',
-			[email, pledge, firstName, lastName, city, state, riderName, donationCenter])
+		db.execute('insert into entries (email, pledge, firstName, lastName, city, state, riderName) values (?, ?, ?, ?, ? ,?, ?)',
+			[email, pledge, firstName, lastName, city, state, riderName])
 		db.commit()
 
 		db = get_db()
-		db.execute('insert into email_queue (email_address, first_name, last_name, donation_center, pledged_rider, pledged_amount, email_sent) values (?, ?, ?, ?, ? ,?, ?)',
-			[email, firstName, lastName, donationCenter, riderName, pledge, 0])
+		db.execute('insert into email_queue (email_address, first_name, last_name, pledged_rider, pledged_amount, email_sent) values (?, ?, ?, ?, ? ,?)',
+			[email, firstName, lastName, riderName, pledge, 0])
 		db.commit()
 
 		pledgeSum = utils.sumTotal(get_db())
 		return jsonify(result='success', total=pledgeSum, pledgeAmount=pledge)
 	else:
 		return jsonify(result='failure')
-
 
 @app.route('/admin/', methods=["POST", "GET"])
 def login():
@@ -125,7 +122,7 @@ def admin():
 		pass
 	if 'username' in session:
 		db = get_db()
-		cur = db.execute('select id, email, pledge, firstName, lastName, city, state, riderName, donationCenter from entries order by id asc')
+		cur = db.execute('select id, email, pledge, firstName, lastName, city, state from entries order by id asc')
 		entries = cur.fetchall()
 
 		return render_template('admin_panel.html', entries=entries)
@@ -151,15 +148,12 @@ def editSiteInfo():
 			cur = db.execute('update site_info set contents = ? where title="inactiveSponsorMessage"', 
 							(request.form["inactiveSponsorMessage"], ))
 			db.commit()
-			cur = db.execute('update site_info set contents = ? where title="banner_image"',
-							(request.form["bannerImage"], ))
-			db.commit()
 
 			return redirect(url_for('editSiteInfo'))
 	else:
 		return redirect(url_for('login'))
 
-@app.route('/admin/edit-article/<articleTitle>', methods=["POST", "GET"])
+@app.route('/admin/edit-article/<articleTitle>', methods=["GET", "POST"])
 def editArticle(articleTitle):
 	if 'username' in session:
 		if request.method=="POST":
@@ -177,22 +171,8 @@ def editArticle(articleTitle):
 			results = cur.fetchall()
 			articleContents = results[0]
 
-			return render_template('front_page_article.html', articleContents=articleContents)
-	else:
-		return redirect(url_for('login'))
+			return render_template('article_editor.html', articleContents=articleContents)
 
-@app.route('/admin/manage-riders', methods=["POST", "GET"])
-def manageRiders():
-	if request.method == "POST":
-		pass
-	if 'username' in session:
-		db = get_db()
-		cur = db.execute('select id, riderName from riders order by id asc')
-		riders = cur.fetchall()
-
-		return render_template('manage_riders.html', riders=riders)
-	else:
-		return redirect(url_for('login'))
 
 @app.route('/delete', methods=["POST", "GET"])
 def deleteRows():
@@ -206,140 +186,6 @@ def deleteRows():
 	return jsonify(result="failure")
 	if request.method == "GET":
 		return redirect(url_for('admin'))
-
-@app.route('/add-rider', methods=["POST", "GET"])
-def addRider():
-	if request.method == "POST":
-		if 'username' in session:
-			db = get_db()
-			newRiderName = request.form['riderName']
-			cur = db.execute('insert into riders (riderName) values (?)', [newRiderName])
-			db.commit()
-
-			return "Good"
-		else:
-			return redirect(url_for('login'))
-	else:
-		return redirect(url_for('login'))
-
-@app.route('/delete-riders', methods=["POST", "GET"])
-def deleteRider():
-	if request.method == "POST":
-		if 'username' in session:
-			db = get_db()
-			for entry in request.form.getlist("ids[]"):
-				cur = db.execute('delete from riders where id = ?', (entry, ))
-			db.commit()
-			return jsonify(result="success")
-	if request.method == "GET":
-		return redirect(url_for('manageRiders'))
-
-		
-@app.route('/meeternie')
-def meetErnie():
-	db = get_db()
-	cur = db.execute('select contents from articles where title = "ernies_story"')
-	results = cur.fetchall()
-	articleContents = results[0]
-
-	return render_template('meet_ernie.html', articleContents=articleContents)
-
-@app.route('/past-rides/<year>', methods=["GET"])
-def pastRides(year):
-	db = get_db()
-	cur = db.execute('select * from past_rides where title = ?', (year, ))
-	results = cur.fetchall()
-	results = results[0]
-	results = render_template_string(results["contents"])
-
-	return render_template('past_rides_dynamic.html', articleInfo=results)
-
-@app.route('/about-elizabeths-new-life-center')
-def aboutENLC():
-	return render_template('enlc.html')
-
-@app.route('/about-community-pregnancy-center')
-def aboutCPC():
-	return render_template('cpc.html')
-
-@app.route('/about-flc-auglaize-county')
-def aboutFLC():
-	return render_template('flc.html')
-
-@app.route('/about-hope-rising')
-def aboutHopeRising():
-	return render_template('hope_rising.html')
-
-@app.route('/admin/update-site-title', methods=["POST"])
-def changeSiteTitle():
-	if request.method == "POST":
-		if 'username' in session:
-			db = get_db()
-			cur = db.execute('select * from site_info where title = "websiteTitle"')
-			results = cur.fetchall()
-			if len(results) > 0:
-				cur = db.execute('update site_info set contents = ? where title = "websiteTitle"', (request.form['websiteTitle'], ))
-				db.commit()
-			else:
-				cur = db.execute('insert into site_info (title, contents) values ("websiteTitle", ?)', (request.form['websiteTitle'], ))
-				db.commit()
-			return redirect(url_for('editSiteInfo'))
-		else:
-			return redirect(url_for('login'))
-	else:
-		pass
-
-@app.route('/admin/add-new-ride/<articleID>', methods=["GET", "POST"])
-def addNewRideArticle(articleID):
-	if request.method == "POST":
-		if 'username' in session:
-			#ADD A COMPLETELY NEW ARTICLE
-			if articleID == "new":
-				db = get_db()
-				#Get data from the request
-				articleTitle = request.form['articleTitle']
-				articleContents = request.form['articleContents']
-				cur = db.execute('insert into past_rides (title, contents) values (?, ?)', (articleTitle, articleContents))
-				db.commit()
-			else:
-				# IF WE ARE HERE WE ARE EDITING AN EXISTING ARTICLE
-				if 'delete' in request.form.keys():
-					db = get_db()
-					articleDatabaseID = request.form['articleDatabaseID']
-					cur = db.execute('delete from past_rides where id= ?', (articleDatabaseID, ))
-					db.commit()
-
-					return redirect(url_for('addNewRideArticle', articleID="new"))
-				else:
-					articleTitle = request.form['articleTitle']
-					articleContents = request.form['articleContents']
-					articleDatabaseID = request.form['articleDatabaseID']
-
-					db = get_db()
-					cur = db.execute('update past_rides set title = ?, contents = ? where id = ?', 
-									 (articleTitle, articleContents, articleDatabaseID))
-					db.commit()
-
-			return redirect(url_for('addNewRideArticle', articleID=articleID))
-
-		else:
-			return redirect(url_for('login'))
-	if request.method == "GET":
-		if 'username' in session:
-			if articleID == "new":
-				articleInformation = {"id": "new", "title":"", "contents":""}
-				return render_template('add-new-ride.html', articleInformation=articleInformation)
-			else:
-				#Valid Article ID
-				db = get_db()
-				cur = db.execute('select * from past_rides where id = ?', (articleID, ))
-				results = cur.fetchall()
-				results = results[0]
-
-				return render_template('add-new-ride.html', articleInformation=results)
-			# Need to add a catch for an invalid ID later that will redirect somewhere
-		else:
-			return redirect(url_for('login'))
 
 @app.route('/admin/images', methods=["GET", "POST"])
 def imageFolder():
@@ -362,16 +208,6 @@ def imageFolder():
 	else:
 		return redirect(url_for('login'))
 
-@app.route('/admin/manage-rider-bios', methods=["GET"])
-def manageRiderBios():
-	if 'username' in session:
-		db = get_db()
-		cur = db.execute('select * from rider_bios')
-		riderBios = cur.fetchall()
-		return render_template('edit_rider_bios.html', riderBios=riderBios)
-	else:
-		return redirect(url_for('login'))
-
 @app.route('/admin/auto-email', methods=["GET", "POST"])
 def autoEmailView():
 	if 'username' in session:
@@ -386,66 +222,5 @@ def autoEmailView():
 			cur = db.execute("update site_info set contents = ? where title = ?;", (emailContents, "autoEmailMessage"))
 			db.commit()
 			return redirect(url_for("autoEmailView"))
-	else:
-		return redirect(url_for('login'))
-
-@app.route('/admin/putNewRiderBio', methods=["POST"])
-def putNewRiderBio():
-	if 'username' in session:
-		# Verify the uploaded information is correct
-		if 'riderPictureFile' not in request.files:
-			return redirect(url_for('manageRiderBios'))
-		riderName = request.form['riderNameInput']
-		riderBio = request.form['riderBioInput']
-		file = request.files['riderPictureFile']
-		fileName = secure_filename(file.filename)
-		if riderName == "" or riderBio == "" or fileName == "":
-			return redirect(url_for('manageRiderBios'))
-			print("We had a problem")
-
-		# Save all necessary info in the database
-		db = get_db()
-		cur = db.execute('insert into rider_bios (name, bio, picture) values (?, ?, ?)', (riderName, riderBio, fileName))
-		db.commit()
-
-		# Upload the file to the server
-		if file and utils.allowedFile(fileName):
-				file.save(os.path.join(UPLOAD_FOLDER, fileName))
-				utils.saveThumbnail(fileName, UPLOAD_FOLDER, THUMBNAIL_FOLDER)
-				return redirect(url_for('manageRiderBios'))
-	else:
-		return redirect(url_for('login'))
-
-@app.route('/admin/updateRiderBio', methods=["POST"])
-def updateRiderBio():
-	if 'username' in session:
-		# If the delete checkbox is checked, delete that rider.
-		if 'deleteRider' in request.form and 'riderID' in request.form:
-			db = get_db()
-			cur = db.execute('delete from rider_bios where id = (?)',(request.form['riderID'],))
-			db.commit()
-			return redirect(url_for('manageRiderBios'))
-
-		# Since it's not a deletion, it must be an edit
-		riderName = request.form['riderName']
-		riderBio = request.form['riderBio']
-		riderID = request.form['riderID']
-		fileName = request.form['originalFilename']
-		# Check if a new filel was uploaded
-		if 'riderPictureUpload' in request.files:
-			if request.files['riderPictureUpload']:
-				print("In Here.")
-				print(request.files)
-				file = request.files['riderPictureUpload']
-				fileName = secure_filename(file.filename)
-				file.save(os.path.join(UPLOAD_FOLDER, fileName))
-				utils.saveThumbnail(fileName, UPLOAD_FOLDER, THUMBNAIL_FOLDER)
-
-		db = get_db()
-		cur = db.execute('update rider_bios SET name = (?), bio = (?), picture = (?) WHERE id = (?)', (riderName, riderBio, fileName, riderID))
-		db.commit()
-
-		return redirect(url_for('manageRiderBios'))
-
 	else:
 		return redirect(url_for('login'))

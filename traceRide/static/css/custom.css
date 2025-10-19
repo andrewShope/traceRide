@@ -5,7 +5,7 @@
 }
 
 .navbar-default {
-	background-color: #76323F;
+	background-color: #002E66;
 }
 
 .bold {
@@ -15,7 +15,7 @@
 /*Navbar Dropdown Elements*/
 
 ul .dropdown a:hover {
-	background-color: #76323F;
+	background-color: #002E66;
 }
 
 ul .dropdown a {
@@ -23,19 +23,19 @@ ul .dropdown a {
 }
 
 .nav .open a:focus {
-	background-color: #76323F;
+	background-color: #002E66;
 }
 
 .nav .open a {
-	background-color: #76323F;
+	background-color: #002E66;
 }
 
 .nav .open a:hover {
-	background-color: #76323F;
+	background-color: #002E66;
 }
 
 ul .dropdown-menu {
-	background-color: #76323F;
+	background-color: #002E66;
 }
 
 /****************************/
@@ -46,7 +46,7 @@ ul .dropdown-menu {
 }
 
 #main-img {
-	max-height: 70vh;
+	max-height: 60vh;
 }
 
 #footer-text a {
@@ -104,7 +104,7 @@ ul .dropdown-menu {
 }
 
 body {
-	background: #ffffff;
+	background: #E2E2E2;
 	color: #f7f7f7;
 	font-family: 'Montserrat', sans-serif;
 }
@@ -126,7 +126,7 @@ p {
 }
 
 .written-content h1, h2, h3, h4 {
-	color: #76323F;
+	color: #002E66;
 	font-family: sans-serif;
 }
 
@@ -135,7 +135,7 @@ p {
 }
 
 .main-banner {
-	background-color: #D7CEC7;
+	background-color: #C9BCA6;
 }
 
 .btn-primary {
@@ -155,11 +155,11 @@ p {
 }
 
 .navbar-inverse .navbar-brand {
-	color: #76323F;
+	color: #002E66;
 }
 
 .navbar-inverse .navbar-brand:hover {
-	color: #76323F;
+	color: #002E66;
 }
 
 #erniePicture {
@@ -182,7 +182,7 @@ p {
 }
 
 .solid-navbar {
-	background-color: #76323F;
+	background-color: #002E66;
 }
 
 .solid-navbar .navbar-brand {
@@ -199,7 +199,7 @@ p {
 
 .solid-navbar .header-link:hover {
 	color: white;
-	background-color: #76323F;
+	background-color: #002E66;
 }
 
 .align-left {
@@ -232,11 +232,11 @@ p {
 }
 
 .nav li a:focus {
-	background-color: #76323F;
+	background-color: #002E66;
 }
 
 #state-map {
-	margin-top: 10px;
+	margin-top: 0px;
 }
 
 #cpc-logo {
@@ -429,3 +429,6 @@ p {
 	clear: both;
 }
 
+#tt-logo {
+	max-width: 70%;
+}

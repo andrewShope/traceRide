@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ernie's Ride</title>
+    <title>Tennessee Trace Ride</title>
     <link href="{{ url_for('static', filename='css/normalize.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/bs/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet">
@@ -27,22 +27,6 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/" class="header-link">Home</a></li>
-            <li><a href="/meeternie" class="header-link">Meet Ernie</a></li>
-            <li class="dropdown"><a href="#" id="thisThing" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Past Rides<span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                {% for rideYear in siteInfo["pastRides"] %}
-                  <li><a href="/past-rides/{{ rideYear["title"] }}">{{ rideYear["title"] }}</a></li>
-                {% endfor %}
-              </ul>
-            </li>
-          <li class="dropdown"><a href="#" id="thisThing" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">About the Centers<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="/about-elizabeths-new-life-center" class="header-link">Elizabeth's New Life Centers</a></li>
-              <li><a href="/about-community-pregnancy-center" class="header-link">Community Pregnancy Center</a></li>
-              <li><a href="/about-flc-auglaize-county" class="header-link">Family Life Center of Auglaize County</a></li>
-              <li><a href="/about-hope-rising" class="header-link">Hope Rising Pregnancy Center</a></li>
-            </ul>
-          </li>
           <li><a href="/#sponsor" class="header-link">Sponsor</a></li>
           </ul>
         </div>
@@ -54,7 +38,7 @@
     <nav class="navbar navbar-default navbar-static-top" id="footer">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" id="footer-text" href="mailto:erniesride@gmail.com">erniesride@gmail.com</a>
+          <a class="navbar-brand" id="footer-text" href="mailto:timshope11@gmail.com">timshope11@gmail.com</a>
         </div>
       </div>
     </nav>

@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Ernie's Ride Admin</title>
+    <title>Tennessee Trace Ride Admin</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/static/css/bs/css/bootstrap.min.css" rel="stylesheet">
@@ -41,7 +41,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Ernie's Ride</a>
+          <a class="navbar-brand" href="/">{{ siteInfo["websiteTitle"] }}</a>
         </div>
         </div>
       </div>
@@ -52,22 +52,9 @@
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <li class=""><a href="/admin">Manage Pledges<span class="sr-only">(current)</span></a></li>
-            <li class=""><a href="/admin/manage-riders">Manage Riders</a></li>
             <li class=""><a href="/admin/edit-site-information">Edit General Info</a></li>
-            {% for article in siteInfo["articles"] %}
-            <li class=""><a href="/admin/edit-article/{{ article.title }}">Edit {{ article.title }}</a></li>
-            {% endfor %}
-            <li class=""><a href="/admin/images">Add &amp; View Images</a></li>
+            <li class=""><a href="/admin/edit-article/main-article">Edit Main Article</a></li>
             <li class=""><a href="/admin/auto-email">Auto Email Message</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li class=""><a href="/admin/manage-rider-bios">Manage Rider Bios</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li class=""><a href="/admin/add-new-ride/new">Add New Ride Article</a></li>
-            {% for rideYear in siteInfo["pastRides"] %}
-            <li class=""><a href='/admin/add-new-ride/{{ rideYear["id"] }}'>{{ rideYear["title"] }}</a></li>
-            {% endfor %}
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
