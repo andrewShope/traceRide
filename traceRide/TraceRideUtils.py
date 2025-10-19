@@ -1,5 +1,4 @@
 import os
-from PIL import Image
 
 thumbPath = "/erniesRide/static/thumbnails/"
 imagePath = "/erniesRide/static/images/"
