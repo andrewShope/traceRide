@@ -118,8 +118,8 @@ $(document).ready(function(){
 		if (valueString.charAt(0) === "$") {
 			valueString = valueString.slice(1, valueString.length);
 		}
-		var value = Number(valueString)*320;
-		var message = " x 320 miles = ";
+		var value = Number(valueString)*200;
+		var message = " x 200 miles = ";
 		value = value.toFixed(2);
 		if (isNaN(value))
 			$("mileText").text(message + "$0.00" + "Maximum Possible Pledge");
