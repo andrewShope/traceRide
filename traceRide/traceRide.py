@@ -122,7 +122,7 @@ def admin():
 		pass
 	if 'username' in session:
 		db = get_db()
-		cur = db.execute('select id, email, pledge, firstName, lastName, city, state from entries order by id asc')
+		cur = db.execute('select id, email, pledge, riderName, firstName, lastName, city, state from entries order by id asc')
 		entries = cur.fetchall()
 
 		return render_template('admin_panel.html', entries=entries)
